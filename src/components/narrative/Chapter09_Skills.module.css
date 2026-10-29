@@ -1,0 +1,188 @@
+/* =========================================================================
+   CHAPTER 09 — SKILLS (STRUCTURED TAXONOMY MATRIX)
+   ========================================================================= */
+
+.section {
+  position: relative;
+  z-index: 10;
+  padding: clamp(6rem, 10vh, 8.5rem) 2rem clamp(5rem, 8vh, 7rem);
+  background: linear-gradient(180deg, rgba(247, 244, 252, 0.92) 0%, rgba(240, 234, 248, 0.96) 50%, rgba(247, 244, 252, 0.92) 100%);
+  border-top: 1px solid rgba(169, 138, 232, 0.18);
+  border-bottom: 1px solid rgba(169, 138, 232, 0.18);
+  scroll-margin-top: 5rem;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 3.8rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--color-purple-deep);
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.38rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(169, 138, 232, 0.3);
+  box-shadow: 0 4px 14px rgba(85, 32, 128, 0.05);
+}
+
+.chapterNumber {
+  color: var(--color-purple-electric);
+  font-weight: 700;
+}
+
+.separator {
+  opacity: 0.4;
+}
+
+.headline {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--text-plum-dark);
+  max-width: 840px;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.8rem;
+}
+
+.subheadline {
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  color: var(--text-plum-muted);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+/* Skills Matrix Grid */
+.matrixGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.8rem;
+}
+
+.matrixCellBlock {
+  width: 100%;
+}
+
+.matrixCard {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(169, 138, 232, 0.28);
+  border-radius: 18px;
+  padding: 1.8rem;
+  box-shadow: 0 10px 30px rgba(85, 32, 128, 0.06);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.matrixCard:hover {
+  border-color: #963BFA;
+  box-shadow: 0 14px 40px rgba(150, 59, 250, 0.12);
+  transform: translateY(-2px);
+}
+
+.cardActive {
+  background: #FFFFFF;
+  border-color: #963BFA;
+  box-shadow: 0 18px 45px rgba(150, 59, 250, 0.18);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.domainNumber {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-purple-electric);
+  letter-spacing: 0.1em;
+}
+
+.domainTitle {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: 1.5rem;
+  color: var(--text-plum-dark);
+  font-weight: 400;
+}
+
+.domainDescription {
+  font-size: 0.88rem;
+  color: var(--text-plum-muted);
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  flex-grow: 1;
+}
+
+/* Skills Tags */
+.skillsTagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.skillTag {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-plum);
+  background: rgba(245, 238, 254, 0.85);
+  border: 1px solid rgba(169, 138, 232, 0.25);
+  padding: 0.28rem 0.65rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.cardActive .skillTag {
+  background: rgba(150, 59, 250, 0.1);
+  border-color: rgba(150, 59, 250, 0.35);
+  color: #552080;
+}
+
+.focusBanner {
+  margin-top: 2.2rem;
+  background: linear-gradient(135deg, rgba(250, 245, 255, 0.95) 0%, rgba(245, 238, 255, 0.95) 100%);
+  border: 1px solid rgba(169, 138, 232, 0.35);
+  border-radius: 14px;
+  padding: 1.2rem 1.8rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.focusTitle {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-purple-deep);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.focusText {
+  font-size: 0.92rem;
+  color: var(--text-plum-muted);
+}

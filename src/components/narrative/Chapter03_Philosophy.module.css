@@ -1,0 +1,518 @@
+/* =========================================================================
+   CHAPTER 03 — APPROACH (LAYERED 3D ENGINEERING STACK)
+   ========================================================================= */
+
+.section {
+  position: relative;
+  z-index: 10;
+  padding: clamp(6rem, 10vh, 8.5rem) 2rem clamp(5rem, 8vh, 7rem);
+  background: linear-gradient(180deg, rgba(247, 244, 252, 0.92) 0%, rgba(243, 237, 250, 0.96) 50%, rgba(247, 244, 252, 0.92) 100%);
+  border-top: 1px solid rgba(169, 138, 232, 0.18);
+  border-bottom: 1px solid rgba(169, 138, 232, 0.18);
+  scroll-margin-top: 5rem;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 3.5rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--color-purple-deep);
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.38rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(169, 138, 232, 0.3);
+  box-shadow: 0 4px 14px rgba(85, 32, 128, 0.05);
+}
+
+.chapterNumber {
+  color: var(--color-purple-electric);
+  font-weight: 700;
+}
+
+.separator {
+  opacity: 0.4;
+}
+
+.headline {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--text-plum-dark);
+  max-width: 840px;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.8rem;
+}
+
+.subheadline {
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  color: var(--text-plum-muted);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+/* Studio 3D Grid */
+.studioGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* Stack Perspective Column */
+.stackColumn {
+  perspective: 1200px;
+}
+
+.stackPerspectiveWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  transform-style: preserve-3d;
+}
+
+.stackSlab {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1.5px solid rgba(169, 138, 232, 0.28);
+  border-radius: 18px;
+  padding: 1.6rem 1.8rem;
+  box-shadow: 0 10px 30px rgba(85, 32, 128, 0.06);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  outline: none;
+}
+
+.stackSlab:hover {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(150, 59, 250, 0.45);
+  box-shadow: 0 14px 35px rgba(85, 32, 128, 0.12);
+}
+
+.slabSelected {
+  background: #FFFFFF;
+  border-color: #963BFA;
+  box-shadow: 0 18px 45px rgba(150, 59, 250, 0.18), 0 0 20px rgba(150, 59, 250, 0.1);
+}
+
+.slabHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.slabNumber {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-purple-electric);
+}
+
+.slabIconWrap {
+  color: var(--color-purple-deep);
+  transition: transform 0.2s ease;
+}
+
+.slabSelected .slabIconWrap {
+  transform: scale(1.15);
+  color: #963BFA;
+}
+
+.slabTitle {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: 1.55rem;
+  color: var(--text-plum-dark);
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+
+.slabSummary {
+  font-size: 0.88rem;
+  color: var(--text-plum-muted);
+  line-height: 1.5;
+}
+
+.slabIndicator {
+  position: absolute;
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: transparent;
+  transition: background 0.25s ease;
+}
+
+.slabSelected .slabIndicator {
+  background: #963BFA;
+}
+
+/* Right Detail Card */
+.detailColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailCard {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(169, 138, 232, 0.32);
+  border-radius: 24px;
+  padding: 2.4rem;
+  box-shadow: 0 20px 50px rgba(85, 32, 128, 0.08);
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.layerBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #552080;
+  background: rgba(169, 138, 232, 0.15);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+}
+
+.detailHeading {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: 2.2rem;
+  color: var(--text-plum-dark);
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+
+.detailDescription {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-plum-muted);
+  margin-bottom: 1.8rem;
+}
+
+/* Approach Workspace */
+.approachWorkspace {
+  background: linear-gradient(135deg, rgba(247, 243, 253, 0.95) 0%, rgba(239, 231, 251, 0.95) 100%);
+  border: 1px solid rgba(169, 138, 232, 0.25);
+  border-radius: 16px;
+  padding: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.approachTitleBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-purple-deep);
+  margin-bottom: 1rem;
+}
+
+.stepCounter {
+  color: var(--color-purple-electric);
+  background: rgba(150, 59, 250, 0.1);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+}
+
+/* 4-Step Progression List */
+.stepProgressionList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.45rem;
+  margin-bottom: 1.2rem;
+}
+
+.stepButton {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(169, 138, 232, 0.25);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.22s ease;
+  position: relative;
+}
+
+.stepButton:hover {
+  background: #FFFFFF;
+  border-color: rgba(150, 59, 250, 0.4);
+}
+
+.stepButtonActive {
+  background: #FFFFFF;
+  border-color: #963BFA;
+  box-shadow: 0 4px 14px rgba(150, 59, 250, 0.15);
+}
+
+.stepNumPill {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--color-purple-electric);
+  background: rgba(150, 59, 250, 0.12);
+  padding: 0.18rem 0.38rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.stepNameLabel {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-plum-dark);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stepArrowIndicator {
+  display: none;
+}
+
+/* Step Detail Spotlight Card */
+.stepDetailCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(169, 138, 232, 0.3);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 4px 16px rgba(85, 32, 128, 0.04);
+}
+
+.stepDetailHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.45rem;
+}
+
+.stepDetailNumber {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #963BFA;
+}
+
+.stepDetailTitle {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: 1.22rem;
+  font-weight: 400;
+  color: var(--text-plum-dark);
+  margin: 0;
+}
+
+.stepDetailSummary {
+  font-size: 0.88rem;
+  color: var(--text-plum-muted);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.stepFocusBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: rgba(245, 237, 254, 0.65);
+  border: 1px solid rgba(169, 138, 232, 0.22);
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+}
+
+.stepFocusTag {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #552080;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.18rem 0.45rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.stepFocusText {
+  font-size: 0.82rem;
+  color: var(--text-plum);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Evidence Container */
+.evidenceContainer {
+  margin-top: 1.6rem;
+  background: #FAF7FD;
+  border: 1px solid rgba(169, 138, 232, 0.28);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.evidenceHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.evidenceBadge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #552080;
+}
+
+.evidenceContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.evidenceTitle {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-plum-dark);
+  margin: 0;
+}
+
+.evidenceSummary {
+  font-size: 0.84rem;
+  color: var(--text-plum-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.evidenceAction {
+  margin-top: 0.4rem;
+}
+
+.viewProjectBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(150, 59, 250, 0.1);
+  border: 1px solid rgba(150, 59, 250, 0.28);
+  color: var(--color-purple-electric);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewProjectBtn:hover {
+  background: #963BFA;
+  color: #FFFFFF;
+}
+
+/* Principles Checklist */
+.principlesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.principlesTitle {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-plum-dark);
+}
+
+.principlesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.principleItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-plum);
+  line-height: 1.45;
+}
+
+.principleCheck {
+  color: #10B981;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .studioGrid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .principlesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .stepProgressionList {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+  }
+
+  .detailCard {
+    padding: 1.5rem;
+  }
+
+  .approachWorkspace {
+    padding: 1rem;
+  }
+
+  .stepFocusBox {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+}

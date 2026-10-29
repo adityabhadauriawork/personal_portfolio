@@ -1,0 +1,97 @@
+@property --hole {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.disc,
+.reveal,
+.fade {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+/* 1. closing — luminous disc expands from screen centre */
+.disc {
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fbf4ff 0%, #d9b8ff 38%, #8b3df5 70%, #2b0f4d 100%);
+  box-shadow: 0 0 80px 30px rgba(168, 112, 255, 0.75);
+  transform: scale(0.2);
+  opacity: 1;
+  visibility: hidden;
+}
+
+.closing {
+  pointer-events: auto;
+}
+
+.closing .disc {
+  visibility: visible;
+  transform: scale(120);
+  transition: transform 0.85s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+/* 2. opening — dark violet cover with a circular hole growing to reveal the new page */
+.reveal {
+  --hole: 0px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent var(--hole),
+    rgba(250, 238, 255, 0.95) calc(var(--hole) + 2px),
+    #8b3df5 calc(var(--hole) + 26px),
+    #2b0f4d calc(var(--hole) + 90px)
+  );
+  visibility: hidden;
+}
+
+.opening {
+  pointer-events: auto;
+}
+
+.opening .reveal {
+  visibility: visible;
+  opacity: 1;
+  animation: holeGrow 1s cubic-bezier(0.65, 0, 0.25, 1) forwards;
+}
+
+@keyframes holeGrow {
+  from { --hole: 0px; }
+  to { --hole: 1800px; }
+}
+
+.fade {
+  background: #2b0f4d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .closing .disc,
+  .opening .reveal {
+    display: none;
+  }
+  .closing .fade {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  .opening .fade {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .root:not(.idle) .fade {
+    visibility: visible;
+  }
+}

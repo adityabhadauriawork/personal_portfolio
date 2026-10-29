@@ -1,0 +1,212 @@
+/* =========================================================================
+   THE BOTANICAL WINDOW — 16:9 WIDESCREEN EDITORIAL INSTALLATION
+   Curated layered frame, landscape 16:9 media stage & editorial quote
+   ========================================================================= */
+
+.botanicalContainer {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* 16:9 Widescreen Layered Frame */
+.windowFrame {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(246, 240, 255, 0.92) 50%,
+    rgba(238, 226, 254, 0.88) 100%
+  );
+  border: 1.5px solid rgba(216, 180, 254, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(168, 85, 247, 0.15),
+    0 20px 50px rgba(45, 12, 77, 0.1),
+    0 6px 20px rgba(147, 51, 234, 0.08);
+  padding: 0.85rem;
+  box-sizing: border-box;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+}
+
+.windowFrame:hover {
+  border-color: rgba(192, 132, 252, 0.85);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(168, 85, 247, 0.25),
+    0 26px 60px rgba(45, 12, 77, 0.15),
+    0 0 28px rgba(192, 132, 252, 0.22);
+}
+
+/* Atmospheric Ambient Aura */
+.ambientAura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 70, 239, 0.2) 0%, rgba(147, 51, 234, 0.08) 50%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  animation: auraBreathe 6s ease-in-out infinite alternate;
+}
+
+@keyframes auraBreathe {
+  0% {
+    transform: translate(-50%, -50%) scale(0.94);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.06);
+    opacity: 1;
+  }
+}
+
+/* 16:9 Inner Media Viewport Stage */
+.mediaStage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 50%, #250B3D 0%, #150524 65%, #0D0218 100%);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  box-shadow:
+    inset 0 0 35px rgba(15, 3, 26, 0.8),
+    inset 0 0 12px rgba(192, 132, 252, 0.12);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animated GIF Flower Image */
+.flowerGif {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.4s ease;
+}
+
+/* Polished SVG Placeholder */
+.placeholderArt {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botanicalSvg {
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(0 0 16px rgba(217, 70, 239, 0.45));
+}
+
+.svgCorePulse {
+  animation: coreGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes coreGlow {
+  0% {
+    filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.5));
+    opacity: 0.88;
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(244, 114, 182, 0.9));
+    opacity: 1;
+  }
+}
+
+/* Refined Editorial Quote */
+.quoteWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 1rem;
+  width: 100%;
+}
+
+.quoteBlock {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  text-align: center;
+}
+
+.quoteText {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  font-weight: 400;
+  color: var(--color-purple-deep, #552080);
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 12px rgba(192, 132, 252, 0.22);
+  line-height: 1.35;
+}
+
+.quoteAuthor {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-style: normal;
+  font-size: clamp(0.92rem, 1.3vw, 1.08rem);
+  font-weight: 400;
+  color: var(--text-plum-muted, #67567E);
+  letter-spacing: 0.015em;
+  white-space: nowrap;
+  opacity: 0.9;
+  line-height: 1.35;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .ambientAura,
+  .svgCorePulse {
+    animation: none !important;
+  }
+}
+
+/* Mobile Adaptation */
+@media (max-width: 640px) {
+  .botanicalContainer {
+    max-width: 100%;
+    gap: 1rem;
+  }
+
+  .windowFrame {
+    padding: 0.65rem;
+    border-radius: 20px;
+  }
+
+  .mediaStage {
+    border-radius: 14px;
+  }
+
+  .quoteBlock {
+    gap: 0.35rem;
+  }
+
+  .quoteText {
+    font-size: 1.2rem;
+  }
+
+  .quoteAuthor {
+    font-size: 0.95rem;
+  }
+}

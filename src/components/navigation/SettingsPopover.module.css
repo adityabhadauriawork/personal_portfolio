@@ -1,0 +1,203 @@
+/* =========================================================================
+   SETTINGS POPOVER STYLES — ADITYA PRATAP SINGH BHADAURIA
+   Glassmorphic Floating Panel, Segmented Quality Control, Accessible Escape
+   ========================================================================= */
+
+.popoverBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(36, 27, 48, 0.25);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: flex-end;
+  padding: 5.5rem 2rem 2rem;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.panel {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px -10px rgba(85, 32, 128, 0.18), 0 0 30px rgba(150, 59, 250, 0.08);
+  backdrop-filter: blur(24px);
+  color: var(--text-plum);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  animation: panelSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  align-self: flex-start;
+}
+
+@keyframes panelSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(169, 138, 232, 0.15);
+  padding-bottom: 0.8rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-purple-deep);
+}
+
+.closeButton {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-plum-muted);
+  background: rgba(169, 138, 232, 0.12);
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(150, 59, 250, 0.15);
+  color: var(--color-purple-electric);
+}
+
+/* Setting Rows */
+.settingSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.settingLabel {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-plum-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settingValue {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-purple-electric);
+  text-transform: none;
+}
+
+/* Segmented Buttons */
+.segmentedGroup {
+  display: flex;
+  background: rgba(230, 220, 245, 0.45);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.segmentedOption {
+  flex: 1;
+  padding: 0.45rem 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-radius: 7px;
+  color: var(--text-plum-muted);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.segmentedOption:hover {
+  color: var(--text-plum-dark);
+}
+
+.segmentedOption.active {
+  background: #FFFFFF;
+  color: var(--color-purple-deep);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(85, 32, 128, 0.1);
+}
+
+.caption {
+  font-size: 0.74rem;
+  color: var(--text-plum-light);
+  line-height: 1.4;
+}
+
+/* Switch Row */
+.switchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.switchInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.switchTitle {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-plum);
+}
+
+.switchSubtitle {
+  font-size: 0.74rem;
+  color: var(--text-plum-muted);
+}
+
+.switchButton {
+  width: 44px;
+  height: 24px;
+  background: rgba(169, 138, 232, 0.35);
+  border-radius: 999px;
+  position: relative;
+  transition: background-color 0.25s ease;
+}
+
+.switchButton.active {
+  background: var(--color-purple-electric);
+}
+
+.switchThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.switchButton.active .switchThumb {
+  transform: translateX(20px);
+}
+
+@media (max-width: 640px) {
+  .popoverBackdrop {
+    padding: 4.5rem 1rem 1rem;
+    justify-content: center;
+  }
+}

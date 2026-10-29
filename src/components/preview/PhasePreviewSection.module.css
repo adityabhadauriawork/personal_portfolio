@@ -1,0 +1,274 @@
+/* =========================================================================
+   PHASE PREVIEW SECTION STYLES — ADITYA PRATAP SINGH BHADAURIA
+   Architectural Scaffolding for Phase 2: About, Flagship Projects & Roadmap
+   ========================================================================= */
+
+.previewSection {
+  position: relative;
+  z-index: 20;
+  padding: 6rem 2.5rem 8rem;
+  background: linear-gradient(180deg, rgba(247, 244, 252, 0) 0%, rgba(247, 244, 252, 0.92) 18%, #F7F4FC 100%);
+  color: var(--text-plum);
+}
+
+.previewContainer {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+/* Section Header */
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 650px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-purple-deep);
+  font-weight: 600;
+}
+
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 400;
+  color: var(--text-plum-dark);
+  line-height: 1.15;
+}
+
+/* About & Philosophy Card */
+.aboutCard {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 3rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px -10px rgba(85, 32, 128, 0.08);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.aboutLead {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  line-height: 1.35;
+  color: var(--text-plum-dark);
+  margin-bottom: 1.2rem;
+}
+
+.aboutText {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--text-plum-muted);
+  margin-bottom: 1rem;
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.pillarBox {
+  background: rgba(240, 234, 248, 0.55);
+  border: 1px solid rgba(169, 138, 232, 0.2);
+  border-radius: 14px;
+  padding: 1.2rem;
+  transition: all 0.25s ease;
+}
+
+.pillarBox:hover {
+  background: #FFFFFF;
+  border-color: var(--color-purple-electric);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(150, 59, 250, 0.1);
+}
+
+.pillarTitle {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-purple-deep);
+  margin-bottom: 0.35rem;
+}
+
+.pillarDesc {
+  font-size: 0.78rem;
+  color: var(--text-plum-muted);
+  line-height: 1.45;
+}
+
+/* Flagship Projects Grid */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.8rem;
+}
+
+.projectCard {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+  box-shadow: 0 10px 25px -8px rgba(85, 32, 128, 0.06);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.projectCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-lavender), var(--color-purple-electric));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 35px -10px rgba(85, 32, 128, 0.14);
+}
+
+.projectCard:hover::before {
+  opacity: 1;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.projectNumber {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-purple-electric);
+  font-weight: 600;
+}
+
+.projectTag {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(169, 138, 232, 0.15);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-purple-deep);
+}
+
+.projectName {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-plum-dark);
+  margin-bottom: 0.6rem;
+}
+
+.projectDesc {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-plum-muted);
+  margin-bottom: 1.5rem;
+}
+
+.phaseBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-purple-electric);
+  font-weight: 500;
+}
+
+/* Roadmap Banner */
+.roadmapBanner {
+  background: linear-gradient(135deg, rgba(85, 32, 128, 0.05) 0%, rgba(150, 59, 250, 0.08) 100%);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 18px;
+  padding: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.roadmapText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.roadmapTitle {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-purple-deep);
+}
+
+.roadmapSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-plum-muted);
+}
+
+.roadmapButton {
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-purple-deep);
+  box-shadow: 0 4px 12px rgba(85, 32, 128, 0.08);
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.roadmapButton:hover {
+  background: var(--color-purple-electric);
+  color: #FFFFFF;
+  border-color: var(--color-purple-electric);
+}
+
+@media (max-width: 900px) {
+  .aboutCard {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .roadmapBanner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .previewSection {
+    padding: 4rem 1.25rem 6rem;
+  }
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+}

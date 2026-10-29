@@ -1,0 +1,169 @@
+/* =========================================================================
+   PORTFOLIO DESIGN SYSTEM — ADITYA PRATAP SINGH BHADAURIA
+   Phase 1: Cinematic Foundation, Light-First Twilight Palette, Editorial Typography
+   ========================================================================= */
+
+:root {
+  /* Color Palette — Refined Light Twilight */
+  --bg-pearl: #F7F4FC;
+  --bg-pearl-alt: #F0EAF8;
+  --bg-pearl-card: rgba(255, 255, 255, 0.72);
+  --bg-overlay: rgba(247, 244, 252, 0.88);
+  
+  --color-lavender-pale: #E4D7FA;
+  --color-lavender: #D8C5F5;
+  --color-violet-soft: #A98AE8;
+  --color-violet-mid: #8E65E2;
+  --color-purple-electric: #963BFA;
+  --color-purple-deep: #552080;
+  --color-purple-dusk: #341253;
+  --color-magenta-glow: #D946EF;
+  
+  /* Text & Contrast */
+  --text-plum-dark: #20172C;
+  --text-plum: #2E223E;
+  --text-plum-muted: #67567E;
+  --text-plum-light: #9485AB;
+  --text-white: #FFFFFF;
+  
+  /* Borders & Glassmorphism */
+  --border-subtle: rgba(169, 138, 232, 0.22);
+  --border-glass: rgba(255, 255, 255, 0.75);
+  --border-hover: rgba(150, 59, 250, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-hover: rgba(255, 255, 255, 0.85);
+  --glass-blur: blur(18px);
+  --glass-shadow: 0 10px 30px -10px rgba(85, 32, 128, 0.08), 0 20px 40px -15px rgba(150, 59, 250, 0.06);
+  --glass-shadow-lg: 0 25px 60px -15px rgba(85, 32, 128, 0.14), 0 0 40px rgba(150, 59, 250, 0.08);
+
+  /* Typography */
+  --font-editorial: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacings */
+  --container-max: 1440px;
+  --nav-height: 80px;
+
+  /* Transitions */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snappy: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --duration-normal: 0.35s;
+  --duration-slow: 0.7s;
+}
+
+/* CSS Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-pearl);
+  color: var(--text-plum);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-pearl);
+  color: var(--text-plum);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(150, 59, 250, 0.2);
+  color: var(--text-plum-dark);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-pearl);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-lavender);
+  border-radius: 999px;
+  border: 2px solid var(--bg-pearl);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-violet-soft);
+}
+
+/* Accessible Focus States */
+:focus-visible {
+  outline: 2px solid var(--color-purple-electric);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-purple-electric);
+  outline-offset: 2px;
+}
+
+/* Button & Link Reset */
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility Animations */
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-pulse-subtle {
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+/* Section containers provide internal padding-top to clear the fixed header smoothly while maintaining background coverage */
+section[id] {
+  scroll-margin-top: 0;
+}

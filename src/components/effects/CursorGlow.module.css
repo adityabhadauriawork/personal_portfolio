@@ -1,0 +1,26 @@
+/* =========================================================================
+   CURSOR GLOW STYLES — ADITYA PRATAP SINGH BHADAURIA
+   Luminous Fluid Trail & Sparkle Canvas Overlay, Zero Event Blocking
+   ========================================================================= */
+
+.cursorRoot {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursorRoot.hidden {
+  opacity: 0;
+}
+
+.cursorCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

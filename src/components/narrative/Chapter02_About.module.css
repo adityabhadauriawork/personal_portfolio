@@ -1,0 +1,426 @@
+/* =========================================================================
+   CHAPTER 02 — ABOUT (FROM IDEA TO SYSTEM)
+   Clean, crisp glassmorphic aesthetics, zero muddy overdraw
+   ========================================================================= */
+
+.section {
+  position: relative;
+  z-index: 10;
+  padding: clamp(6rem, 10vh, 8.5rem) 2rem clamp(5rem, 8vh, 7rem);
+  background: linear-gradient(180deg, rgba(247, 244, 252, 0.92) 0%, rgba(240, 234, 248, 0.96) 40%, rgba(247, 244, 252, 0.92) 100%);
+  border-top: 1px solid rgba(169, 138, 232, 0.18);
+  border-bottom: 1px solid rgba(169, 138, 232, 0.18);
+  scroll-margin-top: 5rem;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 3.2rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--color-purple-deep);
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.38rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(169, 138, 232, 0.3);
+  box-shadow: 0 4px 14px rgba(85, 32, 128, 0.05);
+}
+
+.chapterNumber {
+  color: var(--color-purple-electric);
+  font-weight: 700;
+}
+
+.headline {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--text-plum-dark);
+  max-width: 840px;
+  letter-spacing: -0.015em;
+}
+
+/* Asymmetric Grid */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3.8rem;
+  align-items: center;
+}
+
+/* Left: Concise Text Story */
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.leadCard {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(169, 138, 232, 0.28);
+  border-radius: 20px;
+  padding: clamp(2rem, 3.5vw, 2.8rem);
+  box-shadow: 0 16px 40px rgba(85, 32, 128, 0.07);
+}
+
+.leadParagraph {
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--text-plum-dark);
+  margin-bottom: 1.2rem;
+}
+
+.leadParagraph strong {
+  color: var(--color-purple-deep);
+  font-weight: 600;
+}
+
+.supportingParagraph {
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  line-height: 1.65;
+  color: var(--text-plum-muted);
+}
+
+.credentialPills {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(169, 138, 232, 0.22);
+  border-radius: 14px;
+  padding: 0.9rem 1.6rem;
+  box-shadow: 0 8px 24px rgba(85, 32, 128, 0.04);
+}
+
+.pillItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.pillDivider {
+  width: 1px;
+  height: 28px;
+  background: rgba(169, 138, 232, 0.25);
+  margin: 0 1.2rem;
+}
+
+.pillLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-plum-light);
+}
+
+.pillValue {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-plum-dark);
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+}
+
+.exploreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #552080 0%, #8E65E2 100%);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 25px rgba(85, 32, 128, 0.25);
+  transition: all 0.25s ease;
+}
+
+.exploreBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(85, 32, 128, 0.35);
+}
+
+/* Right: "From Idea to System" Interactive Installation */
+.visualColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.studioCard {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(169, 138, 232, 0.32);
+  border-radius: 24px;
+  padding: 2.2rem;
+  box-shadow: 0 20px 50px rgba(85, 32, 128, 0.09);
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.studioHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.studioEyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--color-purple-electric);
+  font-weight: 600;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.studioTitle {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: 1.75rem;
+  color: var(--text-plum-dark);
+  font-weight: 400;
+}
+
+.activePhaseIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-purple-deep);
+  background: rgba(169, 138, 232, 0.15);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.phaseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-purple-electric);
+  box-shadow: 0 0 8px var(--color-purple-electric);
+}
+
+.stageVisualArea {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(247, 243, 253, 0.95) 0%, rgba(239, 231, 251, 0.95) 100%);
+  border: 1px solid rgba(169, 138, 232, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.networkSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.animatedSpine {
+  animation: spineFlow 12s linear infinite;
+}
+
+@keyframes spineFlow {
+  to {
+    stroke-dashoffset: -80;
+  }
+}
+
+.svgStageGroup {
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.svgStageGroup:hover {
+  transform: scale(1.04);
+  transform-origin: center;
+}
+
+.nodeBackdropCircle {
+  fill: #FFFFFF;
+  stroke: rgba(169, 138, 232, 0.4);
+  stroke-width: 1.5;
+  transition: all 0.3s ease;
+}
+
+.svgActive .nodeBackdropCircle {
+  stroke: #963BFA;
+  stroke-width: 2.5;
+  fill: #FAF5FF;
+}
+
+.nodeCoreCircle {
+  fill: #F3E8FF;
+  stroke: rgba(147, 51, 234, 0.3);
+  stroke-width: 1;
+}
+
+.svgActive .nodeCoreCircle {
+  fill: #963BFA;
+}
+
+.convergePoint1,
+.convergePoint2,
+.convergePoint3,
+.convergePoint4 {
+  fill: #A855F7;
+  animation: pulsePoint 2s ease-in-out infinite alternate;
+}
+
+.convergePoint2 {
+  animation-delay: 0.4s;
+}
+.convergePoint3 {
+  animation-delay: 0.8s;
+}
+.convergePoint4 {
+  animation-delay: 1.2s;
+}
+
+@keyframes pulsePoint {
+  from {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.centerNode {
+  fill: #581C87;
+}
+
+.uiRectOuter {
+  fill: #F3E8FF;
+  stroke: #A855F7;
+  stroke-width: 1.5;
+}
+
+.svgActive .uiRectOuter {
+  fill: #963BFA;
+  stroke: #581C87;
+}
+
+.nodeLabelText {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--text-plum);
+  letter-spacing: 0.05em;
+}
+
+.svgActive .nodeLabelText {
+  fill: var(--color-purple-deep);
+  font-weight: 700;
+}
+
+/* Stage Selectors */
+.stageSelectors {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.selectorBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  background: rgba(245, 238, 254, 0.75);
+  border: 1px solid rgba(169, 138, 232, 0.25);
+  color: var(--text-plum-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.selectorBtn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-purple-deep);
+}
+
+.activeSelector {
+  background: #FFFFFF;
+  border-color: #963BFA;
+  color: #552080;
+  box-shadow: 0 4px 14px rgba(150, 59, 250, 0.15);
+}
+
+.selectorNum {
+  font-size: 0.72rem;
+  opacity: 0.7;
+}
+
+/* Narrative Card */
+.stageNarrativeBox {
+  background: linear-gradient(135deg, rgba(250, 245, 255, 0.9) 0%, rgba(245, 238, 255, 0.9) 100%);
+  border: 1px solid rgba(169, 138, 232, 0.35);
+  border-radius: 16px;
+  padding: 1.4rem;
+}
+
+.narrativeHeader {
+  margin-bottom: 0.6rem;
+}
+
+.narrativeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #552080;
+  letter-spacing: 0.04em;
+}
+
+.narrativeDescription {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-plum-dark);
+  margin-bottom: 0.45rem;
+  line-height: 1.45;
+}
+
+.narrativeDetail {
+  font-size: 0.86rem;
+  color: var(--text-plum-muted);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 2.8rem;
+  }
+}

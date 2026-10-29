@@ -1,0 +1,397 @@
+/* =========================================================================
+   CHAPTER 11 — CONTACT & BOTANICAL CLOSING COMPOSITION
+   Architectural Botanical Window, Warm Closing Narrative & Verified Coordinates
+   ========================================================================= */
+
+.section {
+  position: relative;
+  z-index: 10;
+  padding: clamp(6rem, 10vh, 8.5rem) 2rem clamp(4rem, 6vh, 6rem);
+  background: linear-gradient(180deg, rgba(247, 244, 252, 0.92) 0%, rgba(240, 230, 252, 0.96) 50%, rgba(245, 238, 254, 0.98) 100%);
+  border-top: 1px solid rgba(169, 138, 232, 0.18);
+  scroll-margin-top: 5rem;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+/* Unified Two-Column Studio Composition */
+.compositionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 3.5rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+/* Left Column: Botanical Window */
+.flowerColumn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Right Column: Closing Narrative & Verified Destinations */
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.coordinatesCard {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(169, 138, 232, 0.32);
+  border-radius: 28px;
+  padding: clamp(2rem, 4vw, 3rem);
+  box-shadow: 0 20px 50px rgba(85, 32, 128, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Eyebrow badge inside card */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--color-purple-deep);
+  margin-bottom: 1.2rem;
+  background: rgba(245, 238, 254, 0.85);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(169, 138, 232, 0.3);
+  width: fit-content;
+}
+
+.chapterNumber {
+  color: var(--color-purple-electric);
+  font-weight: 700;
+}
+
+.separator {
+  opacity: 0.4;
+}
+
+/* Section Heading */
+.headline {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--text-plum-dark);
+  letter-spacing: -0.015em;
+  margin-bottom: 1rem;
+}
+
+/* Supporting Message */
+.supportingText {
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  color: var(--text-plum-muted);
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
+}
+
+/* Closing Line */
+.closingLine {
+  display: inline-block;
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
+  font-style: italic;
+  color: var(--color-purple-deep);
+  margin-bottom: 2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(169, 138, 232, 0.22);
+}
+
+/* Destinations Subhead */
+.destinationsLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-purple-deep);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.destinationsDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-purple-electric);
+}
+
+/* Verified Links List — Zigzag Arrangement */
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  margin-bottom: 1.8rem;
+  width: 100%;
+}
+
+.linkTile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 1.75rem);
+  min-height: 64px;
+  box-sizing: border-box;
+  padding: 0.75rem 1.1rem;
+  background: rgba(247, 244, 252, 0.75);
+  border: 1px solid rgba(169, 138, 232, 0.24);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+/* Symmetrical Alternating Zigzag: Odd left, Even right */
+.tileLeft {
+  align-self: flex-start;
+}
+
+.tileRight {
+  align-self: flex-end;
+}
+
+.linkTile:hover {
+  background: #FFFFFF;
+  border-color: #963BFA;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(150, 59, 250, 0.12);
+}
+
+.tileMainLink,
+.tileMainContent {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tileIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(150, 59, 250, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-purple-electric);
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.linkTile:hover .tileIcon {
+  background: var(--color-purple-electric);
+  color: #FFFFFF;
+}
+
+.tileContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.tileLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-purple-deep);
+}
+
+.tileValue {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-plum-dark);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.35;
+}
+
+.tileActions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  margin-left: 0.6rem;
+}
+
+.tileArrowLink,
+.tileArrowWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 3px;
+}
+
+.tileArrow {
+  color: var(--text-plum-muted);
+  opacity: 0.6;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+}
+
+.linkTile:hover .tileArrow {
+  transform: translate(2px, -2px);
+  opacity: 1;
+  color: #963BFA;
+}
+
+.copyInlineBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  font-weight: 600;
+  color: var(--color-purple-deep);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(169, 138, 232, 0.3);
+  padding: 0.3rem 0.55rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.copyInlineBtn:hover {
+  background: var(--color-purple-electric);
+  color: #FFFFFF;
+  border-color: var(--color-purple-electric);
+}
+
+/* Return to top row */
+.scrollTopRow {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid rgba(169, 138, 232, 0.18);
+  padding-top: 1.2rem;
+}
+
+.scrollTopBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-purple-deep);
+  background: rgba(245, 238, 254, 0.6);
+  border: 1px solid rgba(169, 138, 232, 0.25);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.scrollTopBtn:hover {
+  background: #FFFFFF;
+  border-color: #963BFA;
+  color: #963BFA;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(150, 59, 250, 0.12);
+}
+
+/* Thank-you Footer Beneath Composition */
+.footerBar {
+  border-top: 1px solid rgba(169, 138, 232, 0.22);
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-plum-muted);
+}
+
+.footerHeart {
+  color: #963BFA;
+}
+
+.footerRight {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(107, 64, 153, 0.75);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .compositionGrid {
+    grid-template-columns: 1fr;
+    gap: 2.8rem;
+  }
+
+  .flowerColumn {
+    order: 2;
+  }
+
+  .contentColumn {
+    order: 1;
+  }
+
+  .footerBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .linkTile {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 4.5rem 1.25rem 3rem;
+  }
+
+  .coordinatesCard {
+    padding: 1.6rem 1.25rem;
+  }
+
+  .headline {
+    font-size: 2.2rem;
+  }
+
+  .linkTile {
+    width: 100%;
+    align-self: stretch;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .tileValue {
+    font-size: 0.76rem;
+  }
+}

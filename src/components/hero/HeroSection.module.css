@@ -1,0 +1,515 @@
+/* =========================================================================
+   HERO SECTION STYLES — ADITYA PRATAP SINGH BHADAURIA
+   Pinned 360° Cinematic Journey Across 5 Narrative Beats
+   ========================================================================= */
+
+.pinnedTrack {
+  position: relative;
+  min-height: 560vh; /* 420vh of cinematic beats + 140vh dedicated transition zone */
+  width: 100%;
+}
+
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Base Beat Container spanning full screen */
+.beatContainer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6.5rem 3.5rem 3.5rem;
+  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* -------------------------------------------------------------------------
+   BEAT 1: Editorial Introduction
+   ------------------------------------------------------------------------- */
+.beat1 {
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 6.5rem clamp(2rem, 5vw, 5.5rem) clamp(2rem, 4vw, 4rem);
+}
+
+.heroGrid {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(1.5rem, 4vw, 5rem);
+  pointer-events: none;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: auto;
+  min-width: clamp(120px, 16vw, 240px);
+  margin-bottom: 0.4rem;
+}
+
+.captionWrapper {
+  overflow: hidden;
+  margin-bottom: 1.4rem;
+}
+
+.caption {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 0.72vw, 0.76rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 2px 10px rgba(28, 10, 48, 0.8);
+  line-height: 1.45;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+}
+
+.caption.revealed {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.leadWordMask {
+  overflow: hidden;
+  line-height: 0.9;
+}
+
+.leadWord {
+  display: block;
+  font-family: var(--font-editorial, 'Instrument Serif', 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(4.5rem, 8.5vw, 8.8rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.88;
+  color: #FFFFFF;
+  text-shadow: 0 4px 25px rgba(20, 6, 36, 0.85);
+  transform: translateY(115%);
+  opacity: 0;
+  transition: transform 1.0s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
+}
+
+.leadWord.revealed {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.intro.revealed {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+}
+
+.ctaGroup.revealed {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.primaryCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(126, 34, 206, 0.95));
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(126, 34, 206, 0.35);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.primaryCta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(168, 85, 247, 0.5);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius-full);
+  background: rgba(35, 12, 54, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-pearl-white);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  border: 1px solid rgba(216, 180, 254, 0.25);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.secondaryCta:hover {
+  background: rgba(56, 18, 94, 0.8);
+  border-color: rgba(216, 180, 254, 0.5);
+  transform: translateY(-2px);
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+  flex: 1;
+}
+
+.stackMask {
+  overflow: hidden;
+  line-height: 0.92;
+  margin-bottom: 0.12rem;
+}
+
+.stackLine {
+  display: block;
+  font-family: var(--font-editorial, 'Instrument Serif', 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2.8rem, 5.8vw, 6.4rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 0.90;
+  white-space: nowrap;
+  color: #FFFFFF;
+  text-shadow: 0 4px 30px rgba(18, 5, 32, 0.92);
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.0s ease;
+}
+
+.stackLine.revealed {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------------
+   BEAT 2: Perspective & Approach (Left-Aligned Card)
+   ------------------------------------------------------------------------- */
+.beat2 {
+  justify-content: flex-start;
+  padding-left: clamp(2rem, 8vw, 8rem);
+}
+
+.beatCardLeft {
+  max-width: 520px;
+  background: rgba(26, 8, 40, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(216, 180, 254, 0.22);
+  border-radius: var(--radius-lg, 16px);
+  padding: 2.2rem 2.4rem;
+  box-shadow: 0 16px 40px rgba(15, 3, 24, 0.6);
+}
+
+/* -------------------------------------------------------------------------
+   BEAT 3: How I Work (Lower-Center Card with Heart Elevated in Sky)
+   ------------------------------------------------------------------------- */
+.beat3 {
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: clamp(2.5rem, 6vh, 4.8rem);
+}
+
+.beatCardCenter {
+  max-width: 640px;
+  text-align: center;
+  background: rgba(24, 6, 38, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(216, 180, 254, 0.25);
+  border-radius: var(--radius-xl, 24px);
+  padding: 2.2rem 2.8rem;
+  box-shadow: 0 20px 50px rgba(15, 3, 24, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* -------------------------------------------------------------------------
+   BEAT 4: Beauty with a Reason (Right-Aligned Card)
+   ------------------------------------------------------------------------- */
+.beat4 {
+  justify-content: flex-end;
+  padding-right: clamp(2rem, 8vw, 8rem);
+}
+
+.beatCardRight {
+  max-width: 520px;
+  background: rgba(26, 8, 40, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(216, 180, 254, 0.22);
+  border-radius: var(--radius-lg, 16px);
+  padding: 2.2rem 2.4rem;
+  box-shadow: 0 16px 40px rgba(15, 3, 24, 0.6);
+}
+
+/* -------------------------------------------------------------------------
+   BEAT 5: Build with Care & Circular Page Transition
+   ------------------------------------------------------------------------- */
+.beat5 {
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: clamp(1.2rem, 3.5vh, 2.5rem);
+}
+
+.beat5Content {
+  max-width: 680px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(24, 6, 38, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(216, 180, 254, 0.28);
+  border-radius: var(--radius-xl, 24px);
+  padding: 1.8rem 2.6rem 1.6rem;
+  box-shadow: 0 24px 60px rgba(15, 3, 24, 0.75);
+}
+
+.circularTransitionWrapper {
+  margin-top: 1.4rem;
+  width: 100%;
+}
+
+/* Shared Beat Elements */
+.beatTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #DFD2F5;
+  margin-bottom: 0.9rem;
+}
+
+.beatTagDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #A855F7;
+  box-shadow: 0 0 10px #A855F7;
+}
+
+.beatHeadline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 20px rgba(15, 3, 24, 0.85);
+}
+
+.beatHeadlineLarge {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #FFFFFF;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 4px 25px rgba(15, 3, 24, 0.9);
+}
+
+.beatBody {
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+  line-height: 1.65;
+  color: #E2D9F3;
+  text-shadow: 0 2px 10px rgba(15, 3, 24, 0.8);
+}
+
+.beatBodyCenter {
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.7;
+  color: #E2D9F3;
+  max-width: 580px;
+  text-shadow: 0 2px 10px rgba(15, 3, 24, 0.8);
+}
+
+/* Scroll hint indicator at bottom */
+.scrollHint {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.scrollMouse {
+  width: 20px;
+  height: 32px;
+  border: 1.8px solid rgba(223, 210, 245, 0.5);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.scrollWheel {
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: #A855F7;
+  box-shadow: 0 0 6px #A855F7;
+  animation: scrollWheelAnim 1.6s infinite ease-in-out;
+}
+
+@keyframes scrollWheelAnim {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(9px);
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+.scrollHintText {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(223, 210, 245, 0.6);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .beat2 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .beat4 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .beatCardLeft,
+  .beatCardRight,
+  .beatCardCenter,
+  .beat5Content {
+    padding: 1.8rem 1.6rem;
+  }
+}
+
+/* =========================================================================
+   Card-free beat typography (choreographed with the camera, no boxes)
+   ========================================================================= */
+.transitionZone {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 140vh;
+  pointer-events: none;
+}
+
+.beatText {
+  position: relative;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+
+.beatText::before {
+  /* very soft local scrim for legibility — a gradient, not a card */
+  content: '';
+  position: absolute;
+  inset: -3rem -4rem;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(34, 10, 62, 0.42) 0%, rgba(34, 10, 62, 0.18) 45%, transparent 72%);
+  pointer-events: none;
+}
+
+.centered {
+  align-items: center;
+  text-align: center;
+  max-width: 820px;
+}
+
+.alignRight {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.beatTag {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 12px rgba(30, 8, 56, 0.8);
+}
+
+.beatHeadline,
+.beatHeadlineLarge {
+  margin: 0;
+  text-transform: none;
+}
+
+.ringWrapper {
+  margin-top: 2.2rem;
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .beat2, .beat4 { justify-content: center; align-items: flex-start; padding-top: 7rem; }
+  .beat2 .beatText, .beat4 .beatText { text-align: center; align-items: center; }
+  .beatHeadline { font-size: clamp(1.7rem, 7vw, 2.4rem); }
+  .beatHeadlineLarge { font-size: clamp(2rem, 8.5vw, 3rem); }
+}
