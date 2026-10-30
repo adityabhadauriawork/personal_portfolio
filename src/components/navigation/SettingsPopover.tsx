@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { X, Sliders, Volume2, Sparkles, Eye } from 'lucide-react';
-import { useExperience, type VisualQuality } from '../../context/ExperienceContext';
+import { X, Sliders, Volume2, Sparkles, Eye, Sun, Moon } from 'lucide-react';
+import { useExperience, type VisualQuality, type ThemeMode } from '../../context/ExperienceContext';
 import styles from './SettingsPopover.module.css';
 
 interface SettingsPopoverProps {
@@ -10,6 +10,8 @@ interface SettingsPopoverProps {
 
 export const SettingsPopover: React.FC<SettingsPopoverProps> = ({ isOpen, onClose }) => {
   const {
+    theme,
+    setTheme,
     isSoundActive,
     toggleSound,
     visualQuality,
@@ -66,6 +68,41 @@ export const SettingsPopover: React.FC<SettingsPopoverProps> = ({ isOpen, onClos
           >
             <X size={16} />
           </button>
+        </div>
+
+        {/* Appearance / Theme Selection */}
+        <div className={styles.settingSection}>
+          <div className={styles.settingLabel}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              {theme === 'dark' ? (
+                <Moon size={14} color="var(--color-purple-deep)" />
+              ) : (
+                <Sun size={14} color="var(--color-purple-deep)" />
+              )}
+              <span>Appearance Theme</span>
+            </span>
+            <span className={styles.settingValue}>
+              {theme === 'dark' ? 'Dark (Midnight)' : 'Light (Twilight)'}
+            </span>
+          </div>
+          <div className={styles.segmentedGroup}>
+            {(['light', 'dark'] as ThemeMode[]).map((t) => (
+              <button
+                key={t}
+                className={`${styles.segmentedOption} ${theme === t ? styles.active : ''}`}
+                onClick={() => setTheme(t)}
+                data-cursor="pointer"
+                aria-pressed={theme === t}
+              >
+                {t.charAt(0).toUpperCase() + t.slice(1)}
+              </button>
+            ))}
+          </div>
+          <span className={styles.caption}>
+            {theme === 'dark'
+              ? 'Deep midnight plum and luminous orchid atmosphere.'
+              : 'Luminous pearl-lavender twilight daylight atmosphere.'}
+          </span>
         </div>
 
         {/* Ambient Sound Option */}

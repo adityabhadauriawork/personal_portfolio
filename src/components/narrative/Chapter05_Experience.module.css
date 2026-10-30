@@ -6,9 +6,9 @@
   position: relative;
   z-index: 10;
   padding: clamp(6rem, 10vh, 8.5rem) 2rem clamp(5rem, 8vh, 7rem);
-  background: linear-gradient(180deg, rgba(247, 244, 252, 0.92) 0%, rgba(240, 234, 248, 0.96) 50%, rgba(247, 244, 252, 0.92) 100%);
-  border-top: 1px solid rgba(169, 138, 232, 0.18);
-  border-bottom: 1px solid rgba(169, 138, 232, 0.18);
+  background: var(--surface-section);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   scroll-margin-top: 5rem;
   overflow: hidden;
 }
@@ -32,11 +32,11 @@
   letter-spacing: 0.16em;
   color: var(--color-purple-deep);
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--surface-pill);
   padding: 0.38rem 0.95rem;
   border-radius: 999px;
-  border: 1px solid rgba(169, 138, 232, 0.3);
-  box-shadow: 0 4px 14px rgba(85, 32, 128, 0.05);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-soft);
 }
 
 .chapterNumber {
@@ -78,11 +78,11 @@
 }
 
 .experienceCard {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(169, 138, 232, 0.28);
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
   border-radius: 24px;
   padding: clamp(2.2rem, 4vw, 3rem);
-  box-shadow: 0 16px 45px rgba(85, 32, 128, 0.07);
+  box-shadow: var(--shadow-soft);
 }
 
 .cardHeader {
@@ -144,10 +144,10 @@
   font-family: var(--font-mono);
   font-size: 0.76rem;
   color: var(--text-plum-muted);
-  background: rgba(245, 238, 254, 0.8);
+  background: var(--surface-pill);
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgba(169, 138, 232, 0.25);
+  border: 1px solid var(--border-subtle);
 }
 
 .summarySentence {
@@ -193,15 +193,15 @@
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-plum-dark);
-  background: rgba(245, 238, 254, 0.8);
-  border: 1px solid rgba(169, 138, 232, 0.25);
+  background: var(--surface-pill);
+  border: 1px solid var(--border-subtle);
   padding: 0.25rem 0.65rem;
   border-radius: 6px;
 }
 
 /* Document Evidence Flip Cards */
 .evidenceSection {
-  border-top: 1px solid rgba(169, 138, 232, 0.2);
+  border-top: 1px solid var(--border-subtle);
   padding-top: 1.8rem;
 }
 
@@ -249,35 +249,35 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: 16px;
-  border: 1.5px solid rgba(169, 138, 232, 0.3);
+  border: 1.5px solid var(--border-card);
   padding: 1.4rem;
   display: flex;
   flex-direction: column;
 }
 
 .flipFront {
-  background: linear-gradient(135deg, rgba(250, 245, 255, 0.95) 0%, rgba(243, 235, 255, 0.95) 100%);
+  background: var(--surface-subtle);
   justify-content: space-between;
-  box-shadow: 0 8px 24px rgba(85, 32, 128, 0.05);
+  box-shadow: var(--shadow-soft);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .flipFront:hover {
-  border-color: #963BFA;
-  box-shadow: 0 12px 30px rgba(150, 59, 250, 0.14);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-elevated);
 }
 
 .frontIconBadge {
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: #FFFFFF;
-  border: 1px solid rgba(169, 138, 232, 0.3);
+  background: var(--surface-card-elevated);
+  border: 1px solid var(--border-card);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-purple-deep);
-  box-shadow: 0 4px 10px rgba(85, 32, 128, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .frontInfo {
@@ -309,10 +309,10 @@
 
 /* Flip Back */
 .flipBack {
-  background: #FFFFFF;
+  background: var(--surface-card-elevated);
   transform: rotateY(180deg);
-  box-shadow: 0 12px 30px rgba(85, 32, 128, 0.12);
-  border-color: #963BFA;
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--border-strong);
   padding: 0.8rem;
   justify-content: center;
   align-items: center;

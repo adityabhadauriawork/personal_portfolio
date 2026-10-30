@@ -7,9 +7,9 @@
   position: relative;
   z-index: 10;
   padding: clamp(6.5rem, 10vh, 8.5rem) 2rem clamp(5rem, 8vh, 7rem);
-  background: linear-gradient(180deg, rgba(247, 244, 252, 0.92) 0%, rgba(241, 235, 250, 0.96) 50%, rgba(247, 244, 252, 0.92) 100%);
-  border-top: 1px solid rgba(169, 138, 232, 0.18);
-  border-bottom: 1px solid rgba(169, 138, 232, 0.18);
+  background: var(--surface-section);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   scroll-margin-top: 5rem;
   overflow: hidden;
 }
@@ -34,11 +34,11 @@
   letter-spacing: 0.16em;
   color: var(--color-purple-deep);
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--surface-pill);
   padding: 0.38rem 0.95rem;
   border-radius: 999px;
-  border: 1px solid rgba(169, 138, 232, 0.3);
-  box-shadow: 0 4px 14px rgba(85, 32, 128, 0.05);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-soft);
 }
 
 .chapterNumber {
@@ -139,14 +139,14 @@
   font-family: var(--font-mono);
   font-size: 0.62rem;
   font-weight: 700;
-  color: #581C87;
-  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-purple-deep);
+  background: var(--surface-card-elevated);
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
-  border: 1px solid rgba(169, 138, 232, 0.4);
+  border: 1px solid var(--border-card);
   margin-top: 0.3rem;
   white-space: nowrap;
-  box-shadow: 0 4px 10px rgba(88, 28, 135, 0.15);
+  box-shadow: var(--shadow-soft);
 }
 
 /* Zigzag Stations */
@@ -191,8 +191,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #FFFFFF;
-  border: 2px solid #963BFA;
+  background: var(--surface-card-elevated);
+  border: 2px solid var(--border-strong);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,7 +203,7 @@
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
-  color: #552080;
+  color: var(--color-purple-deep);
 }
 
 /* 3D Flip Card at Station */
@@ -244,16 +244,16 @@
 }
 
 .cardFront {
-  background: rgba(255, 255, 255, 0.94);
-  border: 1.5px solid rgba(169, 138, 232, 0.32);
-  box-shadow: 0 14px 40px rgba(85, 32, 128, 0.08);
+  background: var(--surface-card);
+  border: 1.5px solid var(--border-card);
+  box-shadow: var(--shadow-soft);
   justify-content: space-between;
   transition: all 0.3s ease;
 }
 
 .cardFront:hover {
-  border-color: #963BFA;
-  box-shadow: 0 18px 45px rgba(150, 59, 250, 0.16);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-elevated);
 }
 
 .cardTop {
@@ -268,14 +268,15 @@
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #552080;
-  background: rgba(169, 138, 232, 0.15);
+  color: var(--color-purple-deep);
+  background: var(--surface-pill);
+  border: 1px solid var(--border-subtle);
   padding: 0.25rem 0.65rem;
   border-radius: 6px;
 }
 
 .trophyIcon {
-  color: #963BFA;
+  color: var(--color-purple-electric);
 }
 
 /* Metric Display */
@@ -357,10 +358,10 @@
 
 /* Card Back */
 .cardBack {
-  background: #FFFFFF;
-  border: 1.5px solid #963BFA;
+  background: var(--surface-card-elevated);
+  border: 1.5px solid var(--border-strong);
   transform: rotateY(180deg);
-  box-shadow: 0 16px 45px rgba(150, 59, 250, 0.18);
+  box-shadow: var(--shadow-elevated);
   padding: 1.2rem;
   display: flex;
   align-items: center;
@@ -492,16 +493,11 @@
 .dsaCard {
   width: 100%;
   max-width: 880px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(247, 242, 254, 0.9) 50%,
-    rgba(240, 230, 252, 0.92) 100%
-  );
-  border: 1.5px solid rgba(169, 138, 232, 0.35);
+  background: var(--surface-card);
+  border: 1.5px solid var(--border-card);
   border-radius: 24px;
   padding: clamp(2rem, 4vw, 3rem);
-  box-shadow: 0 16px 45px rgba(85, 32, 128, 0.08);
+  box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -527,10 +523,10 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-purple-deep);
-  background: rgba(169, 138, 232, 0.16);
+  background: var(--surface-pill);
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
-  border: 1px solid rgba(169, 138, 232, 0.28);
+  border: 1px solid var(--border-card);
 }
 
 .dsaPlatformsList {
@@ -545,8 +541,8 @@
   font-size: 0.68rem;
   font-weight: 600;
   color: var(--color-purple-electric);
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(169, 138, 232, 0.25);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
 }
@@ -619,7 +615,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #FFFFFF;
-  background: var(--color-purple-electric);
+  background: linear-gradient(135deg, #552080 0%, #8E65E2 100%);
   padding: 0.65rem 1.3rem;
   border-radius: 999px;
   text-decoration: none;
@@ -628,7 +624,6 @@
 }
 
 .dsaProfileLink:hover {
-  background: var(--color-purple-deep);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(150, 59, 250, 0.35);
 }

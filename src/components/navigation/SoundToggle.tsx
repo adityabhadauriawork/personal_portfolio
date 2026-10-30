@@ -1,6 +1,6 @@
 import React from 'react';
 import { useExperience } from '../../context/ExperienceContext';
-import { useAmbientAudio } from '../../hooks/useAmbientAudio';
+import { playInteractionChime } from '../../hooks/useAmbientAudio';
 import styles from './SoundToggle.module.css';
 
 interface SoundToggleProps {
@@ -9,7 +9,6 @@ interface SoundToggleProps {
 
 export const SoundToggle: React.FC<SoundToggleProps> = ({ isDarkTheme = false }) => {
   const { isSoundActive, toggleSound } = useExperience();
-  const { playInteractionChime } = useAmbientAudio();
 
   const handleClick = () => {
     toggleSound();

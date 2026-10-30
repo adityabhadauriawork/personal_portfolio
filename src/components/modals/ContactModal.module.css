@@ -24,11 +24,11 @@
 .modalCard {
   width: 100%;
   max-width: 520px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
   border-radius: 24px;
   padding: 2.2rem;
-  box-shadow: 0 25px 60px -15px rgba(85, 32, 128, 0.25), 0 0 40px rgba(150, 59, 250, 0.1);
+  box-shadow: var(--shadow-elevated);
   backdrop-filter: blur(28px);
   color: var(--text-plum);
   display: flex;
@@ -92,9 +92,9 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
-  background: rgba(240, 234, 248, 0.5);
+  background: var(--surface-subtle);
   border-radius: 12px;
-  border: 1px solid rgba(169, 138, 232, 0.2);
+  border: 1px solid var(--border-subtle);
 }
 
 .infoRow {
@@ -131,8 +131,8 @@
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 10px;
-  background: #FFFFFF;
-  border: 1px solid rgba(169, 138, 232, 0.3);
+  background: var(--surface-inset);
+  border: 1px solid var(--border-card);
   font-family: var(--font-sans);
   font-size: 0.88rem;
   color: var(--text-plum-dark);
@@ -140,7 +140,7 @@
 }
 
 .input:focus, .textarea:focus {
-  border-color: var(--color-purple-electric);
+  border-color: var(--border-strong);
   box-shadow: 0 0 0 3px rgba(150, 59, 250, 0.15);
   outline: none;
 }
@@ -153,7 +153,7 @@
 .submitButton {
   padding: 0.85rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--color-purple-deep), var(--color-purple-electric));
+  background: linear-gradient(135deg, #552080, #8E65E2);
   color: #FFFFFF;
   font-family: var(--font-sans);
   font-size: 0.9rem;

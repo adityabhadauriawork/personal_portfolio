@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode, useCallback } from 'react';
+import { audioConfig } from '../data/audioConfig';
 
 export type VisualQuality = 'auto' | 'high' | 'reduced';
+export type ThemeMode = 'light' | 'dark';
 
 interface ExperienceContextType {
   // Loading lifecycle
@@ -10,11 +12,21 @@ interface ExperienceContextType {
   setLoadingProgress: (p: number) => void;
   finishLoading: () => void;
 
+  // Theme settings
+  theme: ThemeMode;
+  setTheme: (t: ThemeMode) => void;
+  toggleTheme: () => void;
+
   // Sound settings
   isSoundActive: boolean;
   toggleSound: () => void;
   soundVolume: number;
   setSoundVolume: (v: number) => void;
+
+  // Welcome modal
+  isWelcomeModalOpen: boolean;
+  setIsWelcomeModalOpen: (open: boolean) => void;
+  dismissWelcomeModal: (withMusic: boolean) => void;
 
   // Quality & Accessibility
   visualQuality: VisualQuality;
@@ -40,21 +52,48 @@ export const ExperienceProvider: React.FC<{ children: ReactNode }> = ({ children
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [loadingProgress, setLoadingProgress] = useState<number>(0);
 
+  // Theme state: default to 'light', restore saved preference if exists
+  const [theme, setThemeState] = useState<ThemeMode>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio_theme');
+      if (saved === 'dark' || saved === 'light') return saved;
+    }
+    return 'light';
+  });
+
+  // Sound active state: muted by default
   const [isSoundActive, setIsSoundActive] = useState<boolean>(false);
-  const [soundVolume, setSoundVolume] = useState<number>(0.5);
+  const [soundVolume, setSoundVolume] = useState<number>(audioConfig.defaultVolume);
+
+  // Welcome modal: open once per browsing session
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const choice = sessionStorage.getItem('portfolio_welcome_choice');
+      return choice === null;
+    }
+    return false;
+  });
 
   const [visualQuality, setVisualQuality] = useState<VisualQuality>('auto');
-  const [reducedMotion, setReducedMotion] = useState<boolean>(false);
+  const [reducedMotion, setReducedMotion] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    return false;
+  });
 
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState<boolean>(false);
   const [activeNotification, setActiveNotification] = useState<string | null>(null);
 
-  // Detect system reduced motion preference
+  // Synchronize data-theme attribute on documentElement
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  // Listen to prefers-reduced-motion changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mediaQuery.matches);
-
     const handleChange = (e: MediaQueryListEvent) => {
       setReducedMotion(e.matches);
     };
@@ -63,19 +102,17 @@ export const ExperienceProvider: React.FC<{ children: ReactNode }> = ({ children
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Compute effective quality (auto adapts to screen DPR / mobile)
-  const isMobile = typeof window !== 'undefined' && (window.innerWidth < 768 || window.devicePixelRatio < 1.2);
-  const effectiveQuality: 'high' | 'reduced' =
-    visualQuality === 'reduced' ? 'reduced' : visualQuality === 'high' ? 'high' : isMobile ? 'reduced' : 'high';
-
-  const toggleSound = useCallback(() => {
-    setIsSoundActive((prev) => !prev);
+  const setTheme = useCallback((newTheme: ThemeMode) => {
+    setThemeState(newTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio_theme', newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+    }
   }, []);
 
-  const finishLoading = useCallback(() => {
-    setIsLoading(false);
-    setIsLoaded(true);
-  }, []);
+  const toggleTheme = useCallback(() => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  }, [theme, setTheme]);
 
   const showNotification = useCallback((msg: string) => {
     setActiveNotification(msg);
@@ -83,6 +120,49 @@ export const ExperienceProvider: React.FC<{ children: ReactNode }> = ({ children
 
   const hideNotification = useCallback(() => {
     setActiveNotification(null);
+  }, []);
+
+  const toggleSound = useCallback(() => {
+    if (!isSoundActive) {
+      if (audioConfig.isSoundtrackUploaded) {
+        setIsSoundActive(true);
+      } else {
+        showNotification('The custom soundtrack is currently being prepared. Enjoying quiet exploration.');
+      }
+    } else {
+      setIsSoundActive(false);
+    }
+  }, [isSoundActive, showNotification]);
+
+  const dismissWelcomeModal = useCallback(
+    (withMusic: boolean) => {
+      setIsWelcomeModalOpen(false);
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('portfolio_welcome_choice', withMusic ? 'music' : 'silence');
+      }
+
+      if (withMusic) {
+        if (audioConfig.isSoundtrackUploaded) {
+          setIsSoundActive(true);
+        } else {
+          setIsSoundActive(false);
+          showNotification('The custom soundtrack is currently being prepared. Continuing in quiet exploration.');
+        }
+      } else {
+        setIsSoundActive(false);
+      }
+    },
+    [showNotification]
+  );
+
+  // Compute effective quality (auto adapts to screen DPR / mobile)
+  const isMobile = typeof window !== 'undefined' && (window.innerWidth < 768 || window.devicePixelRatio < 1.2);
+  const effectiveQuality: 'high' | 'reduced' =
+    visualQuality === 'reduced' ? 'reduced' : visualQuality === 'high' ? 'high' : isMobile ? 'reduced' : 'high';
+
+  const finishLoading = useCallback(() => {
+    setIsLoading(false);
+    setIsLoaded(true);
   }, []);
 
   return (
@@ -93,10 +173,16 @@ export const ExperienceProvider: React.FC<{ children: ReactNode }> = ({ children
         loadingProgress,
         setLoadingProgress,
         finishLoading,
+        theme,
+        setTheme,
+        toggleTheme,
         isSoundActive,
         toggleSound,
         soundVolume,
         setSoundVolume,
+        isWelcomeModalOpen,
+        setIsWelcomeModalOpen,
+        dismissWelcomeModal,
         visualQuality,
         setVisualQuality,
         effectiveQuality,

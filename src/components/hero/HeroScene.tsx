@@ -12,8 +12,18 @@ interface HeroSceneProps {
 
 export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { effectiveQuality, reducedMotion } = useExperience();
+  const { effectiveQuality, reducedMotion, theme } = useExperience();
   const [webGLError, setWebGLError] = useState<string | null>(null);
+  const onSceneReadyRef = useRef(onSceneReady);
+  const reducedMotionRef = useRef(reducedMotion);
+
+  useEffect(() => {
+    onSceneReadyRef.current = onSceneReady;
+  }, [onSceneReady]);
+
+  useEffect(() => {
+    reducedMotionRef.current = reducedMotion;
+  }, [reducedMotion]);
 
   const sceneRef = useRef<{
     renderer: THREE.WebGLRenderer;
@@ -22,6 +32,9 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
     sculpture: ParticleSculpture;
     landscape: LandscapeEnvironment;
     sculptureLight: THREE.PointLight;
+    ambientLight: THREE.AmbientLight;
+    hemiLight: THREE.HemisphereLight;
+    dirLight: THREE.DirectionalLight;
     reqId: number;
     isVisible: boolean;
   } | null>(null);
@@ -39,9 +52,11 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
 
+    const isDarkInit = document.documentElement.getAttribute('data-theme') === 'dark';
+
     // Scene & Fog
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0xE8DCF8, 0.014);
+    scene.fog = new THREE.FogExp2(isDarkInit ? 0x180F26 : 0xE8DCF8, 0.014);
 
     // Camera setup - framed for 13-17% sculpture width and 32-38% sculpture height
     const camera = new THREE.PerspectiveCamera(44, width / height, 0.1, 150);
@@ -58,12 +73,12 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
       });
     } catch {
       setWebGLError('WebGL is not available in your browser.');
-      if (onSceneReady) onSceneReady();
+      onSceneReadyRef.current?.();
       return;
     }
     renderer.setSize(width, height);
     renderer.setPixelRatio(dpr);
-    renderer.setClearColor(0xF6F1FB, 1);
+    renderer.setClearColor(isDarkInit ? 0x120B1D : 0xF6F1FB, 1);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.02;
 
@@ -104,6 +119,18 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
       // geometry on the next renderer.render() call.
       renderer.resetState();
       renderer.info.reset();
+      scene.traverse((obj) => {
+        const mesh = obj as THREE.Mesh;
+        if (mesh.material) {
+          if (Array.isArray(mesh.material)) {
+            mesh.material.forEach((m) => {
+              m.needsUpdate = true;
+            });
+          } else {
+            mesh.material.needsUpdate = true;
+          }
+        }
+      });
       // Re-apply tone-mapping settings (stored in JS, not in GL state)
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.02;
@@ -112,14 +139,18 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
     renderer.domElement.addEventListener('webglcontextlost', handleContextLost);
     renderer.domElement.addEventListener('webglcontextrestored', handleContextRestored);
 
-    // Coherent Lighting
-    const ambientLight = new THREE.AmbientLight(0xE8DCFB, 0.9);
+    // Coherent Lighting (theme-adaptive)
+    const ambientLight = new THREE.AmbientLight(isDarkInit ? 0x482E6F : 0xE8DCFB, isDarkInit ? 0.75 : 0.9);
     scene.add(ambientLight);
 
-    const hemiLight = new THREE.HemisphereLight(0xF5EDFE, 0x3D1A56, 0.6);
+    const hemiLight = new THREE.HemisphereLight(
+      isDarkInit ? 0x8A5CD0 : 0xF5EDFE,
+      isDarkInit ? 0x120B1D : 0x3D1A56,
+      isDarkInit ? 0.5 : 0.6
+    );
     scene.add(hemiLight);
 
-    const dirLight = new THREE.DirectionalLight(0xFFF8FF, 1.15);
+    const dirLight = new THREE.DirectionalLight(isDarkInit ? 0xE4D4FA : 0xFFF8FF, isDarkInit ? 0.95 : 1.15);
     dirLight.position.set(10, 20, 14);
     scene.add(dirLight);
 
@@ -130,15 +161,16 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
 
     // Construct Environment & Particle Sculpture
     const landscape = new LandscapeEnvironment({
-      reducedMotion,
+      reducedMotion: reducedMotionRef.current,
       quality: effectiveQuality,
     });
+    landscape.setDarkMode(isDarkInit);
     scene.add(landscape.group);
 
     const particleCount = effectiveQuality === 'high' ? 6400 : 3600;
     const sculpture = new ParticleSculpture({
       particleCount,
-      reducedMotion,
+      reducedMotion: reducedMotionRef.current,
     });
     scene.add(sculpture.group);
 
@@ -263,7 +295,8 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
       }
 
       // Read pointer directly from zero-overhead pointerState
-      const parallaxFactor = reducedMotion ? 0.04 : (isMobile ? 0.12 : 0.35);
+      const isReduced = reducedMotionRef.current;
+      const parallaxFactor = isReduced ? 0.04 : (isMobile ? 0.12 : 0.35);
       targetCamPos.x = baseCamX + pointerState.normalizedX * parallaxFactor;
       targetCamPos.y = baseCamY + pointerState.normalizedY * (parallaxFactor * 0.4);
       targetCamPos.z = baseCamZ;
@@ -301,7 +334,7 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
       const pulse = sculpture.getHeartbeatPulse();
       sculptureLight.intensity = 2.2 + pulse * 1.8;
 
-      if (!reducedMotion && pulse > 0.04 && isSculptureInView) {
+      if (!isReduced && pulse > 0.04 && isSculptureInView) {
         // Restrained 1-2px impulse synchronized with the heartbeat pulse
         const microShake = pulse * 0.010;
         camera.position.x += Math.sin(timer.getElapsed() * 60.0) * microShake;
@@ -316,8 +349,8 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
       }
 
       frameCount++;
-      if (frameCount === 2 && onSceneReady) {
-        onSceneReady();
+      if (frameCount === 2) {
+        onSceneReadyRef.current?.();
       }
     };
 
@@ -330,6 +363,9 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
       sculpture,
       landscape,
       sculptureLight,
+      ambientLight,
+      hemiLight,
+      dirLight,
       reqId,
       isVisible: true,
     };
@@ -357,13 +393,18 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
         sceneRef.current.sculpture.dispose();
         sceneRef.current.landscape.dispose();
         sceneRef.current.renderer.dispose();
+        try {
+          sceneRef.current.renderer.forceContextLoss();
+        } catch {
+          // Ignore if context already lost
+        }
         if (container.contains(sceneRef.current.renderer.domElement)) {
           container.removeChild(sceneRef.current.renderer.domElement);
         }
         sceneRef.current = null;
       }
     };
-  }, [effectiveQuality, reducedMotion, onSceneReady]);
+  }, [effectiveQuality]);
 
   // Reduced motion dynamic update
   useEffect(() => {
@@ -372,6 +413,29 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onSceneReady }) => {
       sceneRef.current.landscape.setReducedMotion(reducedMotion);
     }
   }, [reducedMotion]);
+
+  // Theme dynamic update: adjust WebGL clear color, fog, sky dome, and light intensities in place
+  useEffect(() => {
+    if (!sceneRef.current) return;
+    const { renderer, scene, landscape, ambientLight, hemiLight, dirLight } = sceneRef.current;
+    const isDark = theme === 'dark';
+
+    renderer.setClearColor(isDark ? 0x120B1D : 0xF6F1FB, 1);
+    if (scene.fog) {
+      scene.fog.color.setHex(isDark ? 0x180F26 : 0xE8DCF8);
+    }
+    landscape.setDarkMode(isDark);
+
+    ambientLight.color.setHex(isDark ? 0x482E6F : 0xE8DCFB);
+    ambientLight.intensity = isDark ? 0.75 : 0.9;
+
+    hemiLight.color.setHex(isDark ? 0x8A5CD0 : 0xF5EDFE);
+    hemiLight.groundColor.setHex(isDark ? 0x120B1D : 0x3D1A56);
+    hemiLight.intensity = isDark ? 0.5 : 0.6;
+
+    dirLight.color.setHex(isDark ? 0xE4D4FA : 0xFFF8FF);
+    dirLight.intensity = isDark ? 0.95 : 1.15;
+  }, [theme]);
 
   if (webGLError) {
     return (

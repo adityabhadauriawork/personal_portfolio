@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Menu, X, ArrowUpRight } from 'lucide-react';
+import { Settings, Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
 import { useExperience } from '../../context/ExperienceContext';
 import { SoundToggle } from './SoundToggle';
 import { SettingsPopover } from './SettingsPopover';
@@ -16,6 +16,8 @@ export const Navigation: React.FC<NavigationProps> = ({
 }) => {
   const {
     isLoaded,
+    theme,
+    toggleTheme,
     isSettingsOpen,
     setIsSettingsOpen,
     isContactModalOpen: _isContactModalOpen,
@@ -84,12 +86,14 @@ export const Navigation: React.FC<NavigationProps> = ({
     }
   };
 
-  const isDarkTheme = currentRoute === '/about';
+  const isDarkMode = theme === 'dark';
 
   return (
     <>
       <header
-        className={`${styles.navWrapper} ${isDarkTheme ? styles.themeDark : styles.themeLight}`}
+        className={`${styles.navWrapper} ${isDarkMode ? styles.modeDark : styles.modeLight} ${
+          currentRoute === '/about' ? styles.onInnerPage : ''
+        }`}
         style={{
           opacity: isLoaded ? 1 : 0,
           transform: isLoaded ? 'translateY(0)' : 'translateY(-20px)',
@@ -141,8 +145,19 @@ export const Navigation: React.FC<NavigationProps> = ({
             </ul>
           </nav>
 
-          {/* Controls & CTAs: Settings, Sound, Let's talk */}
+          {/* Controls & CTAs: Theme, Settings, Sound, Let's talk */}
           <div className={styles.navActions}>
+            <button
+              className={styles.settingsButton}
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+              data-cursor="pointer"
+            >
+              {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+              <span className={styles.settingsLabel}>{theme === 'dark' ? 'LIGHT' : 'DARK'}</span>
+            </button>
+
             <button
               className={styles.settingsButton}
               onClick={() => setIsSettingsOpen(!isSettingsOpen)}
@@ -153,7 +168,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               <span className={styles.settingsLabel}>SETTINGS</span>
             </button>
 
-            <SoundToggle isDarkTheme={isDarkTheme} />
+            <SoundToggle isDarkTheme={!isDarkMode} />
 
             <button
               className={styles.talkButton}
@@ -210,7 +225,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             Let's talk
           </button>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <SoundToggle />
+            <SoundToggle isDarkTheme={!isDarkMode} />
           </div>
         </div>
       </div>

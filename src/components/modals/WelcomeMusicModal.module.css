@@ -1,0 +1,277 @@
+/* =========================================================================
+   WELCOME MUSIC MODAL STYLING
+   Warm, editorial, cinematic popup for soundtrack choice
+   ========================================================================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(18, 11, 29, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: fadeInOverlay 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalCard {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(169, 138, 232, 0.38);
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 2.75rem);
+  box-shadow: 
+    0 20px 60px rgba(85, 32, 128, 0.16),
+    0 0 40px rgba(150, 59, 250, 0.1);
+  overflow: hidden;
+  text-align: center;
+  animation: slideUpModal 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Ambient Top Accent Light */
+.ambientGlow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.32) 0%, rgba(244, 114, 182, 0.12) 55%, transparent 75%);
+  pointer-events: none;
+}
+
+/* Tagline Badge */
+.tagLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7E22CE;
+  background: rgba(169, 138, 232, 0.16);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(169, 138, 232, 0.28);
+}
+
+.tagIcon {
+  color: #9333EA;
+}
+
+/* Headline */
+.headline {
+  font-family: var(--font-editorial, 'Instrument Serif', Georgia, serif);
+  font-size: clamp(1.9rem, 4.2vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.18;
+  color: #241B30;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.85rem;
+}
+
+/* Narrative Subtext */
+.subtext {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: #63527A;
+  margin-bottom: 2rem;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Actions Group */
+.actionsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Primary "Explore with music" button */
+.musicButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.95rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8E2DE2 0%, #7000FF 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 
+    0 8px 24px rgba(112, 0, 255, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.musicButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 32px rgba(112, 0, 255, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  background: linear-gradient(135deg, #9C3CF2 0%, #7D14FF 100%);
+}
+
+.musicButton:active {
+  transform: translateY(0);
+}
+
+.buttonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Secondary "Explore in silence" button */
+.silenceButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  background: rgba(243, 237, 250, 0.6);
+  color: #552080;
+  border: 1px solid rgba(169, 138, 232, 0.35);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.silenceButton:hover {
+  background: rgba(235, 225, 248, 0.9);
+  border-color: rgba(150, 59, 250, 0.45);
+  color: #38125E;
+}
+
+.buttonIconSecondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7E22CE;
+}
+
+.buttonLabel {
+  line-height: 1;
+}
+
+/* Footnote */
+.footnote {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  color: #8C7A9F;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+/* =========================================================================
+   DARK THEME OVERRIDES FOR WELCOME MODAL
+   ========================================================================= */
+
+.dark .modalCard,
+:global([data-theme="dark"]) .modalCard {
+  background: rgba(24, 15, 38, 0.95);
+  border-color: rgba(192, 132, 252, 0.28);
+  box-shadow: 
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(168, 85, 247, 0.15);
+}
+
+.dark .headline,
+:global([data-theme="dark"]) .headline {
+  color: #F8F3FE;
+}
+
+.dark .subtext,
+:global([data-theme="dark"]) .subtext {
+  color: #C3B4D8;
+}
+
+.dark .tagLine,
+:global([data-theme="dark"]) .tagLine {
+  background: rgba(88, 28, 135, 0.4);
+  color: #D8B4FE;
+  border-color: rgba(192, 132, 252, 0.28);
+}
+
+.dark .tagIcon,
+:global([data-theme="dark"]) .tagIcon {
+  color: #C084FC;
+}
+
+.dark .silenceButton,
+:global([data-theme="dark"]) .silenceButton {
+  background: rgba(45, 28, 70, 0.6);
+  color: #E9D8FD;
+  border-color: rgba(192, 132, 252, 0.28);
+}
+
+.dark .silenceButton:hover,
+:global([data-theme="dark"]) .silenceButton:hover {
+  background: rgba(60, 36, 95, 0.85);
+  border-color: rgba(192, 132, 252, 0.45);
+  color: #FFFFFF;
+}
+
+.dark .buttonIconSecondary,
+:global([data-theme="dark"]) .buttonIconSecondary {
+  color: #D8B4FE;
+}
+
+.dark .footnote,
+:global([data-theme="dark"]) .footnote {
+  color: #9C89B5;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .modalCard {
+    animation-duration: 0.01ms !important;
+  }
+}
+

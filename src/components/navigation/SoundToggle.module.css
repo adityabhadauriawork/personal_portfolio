@@ -8,14 +8,14 @@
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.35rem 0.65rem;
+  padding: 0.36rem 0.72rem;
   border-radius: 999px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: rgba(255, 255, 255, 0.85);
+  background: rgba(34, 20, 56, 0.72);
+  border: 1px solid rgba(192, 132, 252, 0.32);
+  color: #F3E8FF;
   font-family: var(--font-sans);
   font-size: 0.72rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: all 0.25s ease;
@@ -25,34 +25,34 @@
 }
 
 .soundButton:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(56, 32, 92, 0.9);
+  border-color: #C084FC;
   color: #FFFFFF;
 }
 
 .soundButton.active {
-  background: rgba(168, 85, 247, 0.18);
-  border-color: rgba(168, 85, 247, 0.55);
+  background: rgba(126, 34, 206, 0.55);
+  border-color: #D8B4FE;
   color: #FFFFFF;
 }
 
-/* Dark Theme for Inner Pages */
+/* Light Mode Pill (dark ink on light glass pill) */
 .soundButton.darkTheme {
-  color: #4C266E;
-  border-color: rgba(150, 59, 250, 0.35);
-  background: rgba(255, 255, 255, 0.65);
+  color: #2A1644;
+  border-color: rgba(142, 101, 226, 0.32);
+  background: rgba(255, 255, 255, 0.72);
 }
 
 .soundButton.darkTheme:hover {
-  background: rgba(150, 59, 250, 0.15);
-  border-color: #963BFA;
+  background: rgba(255, 255, 255, 0.94);
+  border-color: #7B2CBF;
   color: #1E0B36;
 }
 
 .soundButton.darkTheme.active {
-  background: rgba(150, 59, 250, 0.18);
-  border-color: #963BFA;
-  color: #2D1548;
+  background: rgba(123, 44, 191, 0.16);
+  border-color: #7B2CBF;
+  color: #201235;
 }
 
 /* Waveform Bars */

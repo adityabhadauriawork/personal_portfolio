@@ -23,11 +23,11 @@
 .panel {
   width: 100%;
   max-width: 360px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
   border-radius: 18px;
   padding: 1.5rem;
-  box-shadow: 0 20px 40px -10px rgba(85, 32, 128, 0.18), 0 0 30px rgba(150, 59, 250, 0.08);
+  box-shadow: var(--shadow-elevated);
   backdrop-filter: blur(24px);
   color: var(--text-plum);
   display: flex;
@@ -109,7 +109,8 @@
 /* Segmented Buttons */
 .segmentedGroup {
   display: flex;
-  background: rgba(230, 220, 245, 0.45);
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
   border-radius: 10px;
   padding: 3px;
   gap: 3px;
@@ -131,10 +132,11 @@
 }
 
 .segmentedOption.active {
-  background: #FFFFFF;
+  background: var(--surface-card-elevated);
   color: var(--color-purple-deep);
+  border: 1px solid var(--border-card);
   font-weight: 600;
-  box-shadow: 0 2px 6px rgba(85, 32, 128, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .caption {

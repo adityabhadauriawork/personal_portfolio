@@ -16,6 +16,7 @@ import { Chapter09Skills } from './components/narrative/Chapter09_Skills';
 import { Chapter10CV } from './components/narrative/Chapter10_CV';
 import { Chapter11Contact } from './components/narrative/Chapter11_Contact';
 import { ContactModal } from './components/modals/ContactModal';
+import { WelcomeMusicModal } from './components/modals/WelcomeMusicModal';
 import { ToastNotification } from './components/ui/ToastNotification';
 import { CursorGlow } from './components/effects/CursorGlow';
 import { useAmbientAudio } from './hooks/useAmbientAudio';
@@ -29,6 +30,10 @@ const PortfolioExperience: React.FC = () => {
   const portalBusy = useRef(false);
   const timers = useRef<number[]>([]);
   useEffect(() => () => timers.current.forEach((t) => window.clearTimeout(t)), []);
+
+  const handleSceneReady = useCallback(() => {
+    setIsSceneReady(true);
+  }, []);
 
   // Minimal route state: '/' for 360° Opening World, '/about' for Narrative Chapters
   const [currentRoute, setCurrentRoute] = useState<'/' | '/about'>(() => {
@@ -120,7 +125,7 @@ const PortfolioExperience: React.FC = () => {
       <CursorGlow />
 
       {/* 3. Single Persistent Three.js 3D World (Heartbeat sculpture, glass flowers, 360° orbit) */}
-      <HeroScene onSceneReady={() => setIsSceneReady(true)} />
+      <HeroScene onSceneReady={handleSceneReady} />
 
       {/* 4. Translucent Floating Navigation Bar */}
       <Navigation currentRoute={currentRoute} onNavigate={portalNavigate} />
@@ -151,7 +156,9 @@ const PortfolioExperience: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  borderBottom: '1px solid rgba(216, 180, 254, 0.15)',
+                  flexWrap: 'wrap',
+                  gap: '1rem',
+                  borderBottom: '1px solid var(--border-card)',
                   marginBottom: '1rem',
                 }}
               >
@@ -163,10 +170,10 @@ const PortfolioExperience: React.FC = () => {
                     gap: '0.6rem',
                     padding: '0.6rem 1.2rem',
                     borderRadius: '9999px',
-                    background: 'rgba(56, 18, 94, 0.65)',
+                    background: 'var(--surface-card-elevated)',
                     backdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(216, 180, 254, 0.35)',
-                    color: '#F5EDFE',
+                    border: '1px solid var(--border-strong)',
+                    color: 'var(--text-plum-dark)',
                     fontFamily: 'var(--font-mono, monospace)',
                     fontSize: '0.78rem',
                     fontWeight: 600,
@@ -174,6 +181,7 @@ const PortfolioExperience: React.FC = () => {
                     textTransform: 'uppercase',
                     cursor: 'pointer',
                     transition: 'all 0.25s ease',
+                    boxShadow: 'var(--shadow-soft)',
                   }}
                   data-cursor="pointer"
                   aria-label="Return to 3D Opening Atmosphere"
@@ -189,12 +197,13 @@ const PortfolioExperience: React.FC = () => {
                     gap: '0.5rem',
                     fontFamily: 'var(--font-mono, monospace)',
                     fontSize: '0.74rem',
-                    color: 'rgba(223, 210, 245, 0.65)',
+                    color: 'var(--text-plum-muted)',
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
+                    fontWeight: 600,
                   }}
                 >
-                  <Compass size={14} color="#C084FC" />
+                  <Compass size={14} color="var(--accent-purple)" />
                   <span>Aditya Pratap Singh Bhadauria · Portfolio</span>
                 </div>
               </div>
@@ -235,6 +244,9 @@ const PortfolioExperience: React.FC = () => {
           )
         )}
       </main>
+
+      {/* Cinematic Welcome Music Choice Modal (once per session after initial load) */}
+      {isLoaded && <WelcomeMusicModal />}
 
       {/* Fast Contact Modal Drawer */}
       <ContactModal />

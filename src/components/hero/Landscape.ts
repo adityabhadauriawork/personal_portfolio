@@ -57,13 +57,23 @@ export class LandscapeEnvironment {
     `;
 
     const skyFragmentShader = `
+      uniform float uDarkMode;
       varying vec2 vUv;
 
       void main() {
-        // Pastel lavender sky: pearl horizon -> pale lavender -> soft violet upper
-        vec3 colHorizon = vec3(0.965, 0.945, 0.985); // #F6F1FB Pearl white-lavender
-        vec3 colMid = vec3(0.880, 0.830, 0.960);     // #DFD2F5 Pale lavender
-        vec3 colUpper = vec3(0.775, 0.695, 0.915);   // #C4B0E8 Soft violet
+        // Light mode: Pastel lavender sky (pearl horizon -> pale lavender -> soft violet upper)
+        vec3 lightHorizon = vec3(0.965, 0.945, 0.985); // #F6F1FB
+        vec3 lightMid     = vec3(0.880, 0.830, 0.960); // #DFD2F5
+        vec3 lightUpper   = vec3(0.775, 0.695, 0.915); // #C4B0E8
+
+        // Dark mode: Midnight plum & nocturnal orchid sky
+        vec3 darkHorizon  = vec3(0.165, 0.085, 0.275); // #2A1646
+        vec3 darkMid      = vec3(0.098, 0.051, 0.175); // #190D2D
+        vec3 darkUpper    = vec3(0.055, 0.027, 0.102); // #0E071A
+
+        vec3 colHorizon = mix(lightHorizon, darkHorizon, uDarkMode);
+        vec3 colMid     = mix(lightMid, darkMid, uDarkMode);
+        vec3 colUpper   = mix(lightUpper, darkUpper, uDarkMode);
 
         vec3 sky;
         if (vUv.y < 0.40) {
@@ -74,13 +84,17 @@ export class LandscapeEnvironment {
 
         // Soft horizontal atmospheric haze right above horizon
         float haze = exp(-pow((vUv.y - 0.22) * 5.5, 2.0)) * 0.16;
-        sky += vec3(0.98, 0.95, 1.0) * haze;
+        vec3 hazeColor = mix(vec3(0.98, 0.95, 1.0), vec3(0.45, 0.22, 0.72), uDarkMode);
+        sky += hazeColor * haze;
 
         gl_FragColor = vec4(sky, 1.0);
       }
     `;
 
     this.skyMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uDarkMode: { value: 0.0 },
+      },
       vertexShader: skyVertexShader,
       fragmentShader: skyFragmentShader,
       side: THREE.BackSide,
@@ -596,6 +610,12 @@ export class LandscapeEnvironment {
     // Subtle breathing pulse for pearl orb
     if (this.pearlOrbMesh) {
       this.pearlOrbMesh.position.y = -1.15 + Math.sin(elapsedTime * 1.4) * 0.035;
+    }
+  }
+
+  public setDarkMode(isDark: boolean) {
+    if (this.skyMaterial && this.skyMaterial.uniforms.uDarkMode) {
+      this.skyMaterial.uniforms.uDarkMode.value = isDark ? 1.0 : 0.0;
     }
   }
 

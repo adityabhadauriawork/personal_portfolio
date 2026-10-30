@@ -74,10 +74,10 @@ const LAYERS: StackLayer[] = [
       'Transparent analysis of error modes and limitations',
     ],
     evidence: {
-      projectTitle: 'AutoMind Enterprise & FlyRank AI',
-      categoryTag: 'Machine Learning & Semantic Search',
+      projectTitle: 'AutoMind Enterprise, FlyRank AI & Search Ranking Capstone',
+      categoryTag: 'Relevant Project / Evidence',
       projectSummary:
-        'Contributed to semantic search pipelines and ranking evaluation (NDCG/MRR) during my internship at FlyRank AI, and engineered data-driven forecasting in AutoMind Enterprise.',
+        'Contributed to semantic search pipelines and ranking evaluation (NDCG/MRR) at FlyRank AI, modeled search ranking and discoverability features in my capstone work, and built data-driven forecasting in AutoMind Enterprise.',
       projectUrl: 'https://automind-enterprise.streamlit.app/',
       anchorId: 'projects',
     },
@@ -124,10 +124,10 @@ const LAYERS: StackLayer[] = [
       'Modular service structure with maintainable logic',
     ],
     evidence: {
-      projectTitle: 'LinkForge & OpsForge',
-      categoryTag: 'Backend Architecture & APIs',
+      projectTitle: 'LinkForge, OpsForge & Health Nexus',
+      categoryTag: 'Relevant Project / Evidence',
       projectSummary:
-        'Engineered high-throughput URL redirection with Redis caching and Prisma ORM in LinkForge, and built asynchronous workflow execution with retry logic in OpsForge.',
+        'Built URL redirection and Redis caching in LinkForge, asynchronous workflow retries in OpsForge, and connected Raspberry Pi / ESP32 hardware-software data flows for assistive control in Health Nexus.',
       projectUrl: 'https://github.com/adityabhadauriawork',
       anchorId: 'projects',
     },
@@ -174,10 +174,10 @@ const LAYERS: StackLayer[] = [
       'Full respect for reduced-motion system preferences',
     ],
     evidence: {
-      projectTitle: 'Creative 3D Portfolio & Prodigy InfoTech',
-      categoryTag: 'Frontend Engineering & Interaction',
+      projectTitle: 'Creative 3D Portfolio, Prodigy InfoTech & Health Nexus',
+      categoryTag: 'Relevant Project / Evidence',
       projectSummary:
-        'Developed modular React UI components during software internship at Prodigy InfoTech, and engineered this single-page Three.js WebGL portfolio experience.',
+        'Developed modular React UI components at Prodigy InfoTech, designed accessible assistive interfaces in Health Nexus, and engineered this interactive React + Three.js portfolio.',
       projectUrl: 'https://github.com/adityabhadauriawork',
       anchorId: 'projects',
     },
@@ -224,10 +224,10 @@ const LAYERS: StackLayer[] = [
       'Visual dashboards focused on actionable takeaways',
     ],
     evidence: {
-      projectTitle: 'AutoMind Enterprise & Workforce Analytics',
-      categoryTag: 'Data Pipelines & Market Intelligence',
+      projectTitle: 'AutoMind Enterprise, Search Ranking Capstone & Workforce Analytics',
+      categoryTag: 'Relevant Project / Evidence',
       projectSummary:
-        'Created automated data profiling and statistical forecasting in AutoMind Enterprise, and analyzed tech job market trends using multivariate regression.',
+        'Created automated data profiling and statistical forecasting in AutoMind Enterprise, cleaned and engineered ranking features for the Google Search Ranking & Discoverability Capstone, and analyzed job market trends.',
       projectUrl: 'https://automind-enterprise.streamlit.app/',
       anchorId: 'projects',
     },

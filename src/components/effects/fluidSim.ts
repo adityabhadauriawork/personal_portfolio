@@ -330,11 +330,15 @@ export class FluidSim {
   }
 
   /** (Re)allocates targets for the current canvas size. Called on init and on viewport resize. */
-  resize() {
+  resize(force = false) {
     const gl = this.gl;
+    if (gl.isContextLost()) return;
     const pr = this.opts.pixelRatio;
     const w = Math.max(1, Math.floor(window.innerWidth * pr));
     const h = Math.max(1, Math.floor(window.innerHeight * pr));
+    if (!force && this.canvas.width === w && this.canvas.height === h && this.allTextures.length > 0) {
+      return;
+    }
     this.canvas.width = w;
     this.canvas.height = h;
     this.freeTargets();
@@ -346,6 +350,28 @@ export class FluidSim {
     this.divergenceFBO = this.createFBO(sim.w, sim.h, f.r, f.fmtR);
     this.curlFBO = this.createFBO(sim.w, sim.h, f.r, f.fmtR);
     this.pressureFBO = this.createDouble(sim.w, sim.h, f.r, f.fmtR);
+  }
+
+  setCurl(curl: number) {
+    this.opts.curl = curl;
+  }
+
+  /** Rebuilds shaders, VAO, buffers, and FBOs after a WebGL context restoration event. */
+  restore(): boolean {
+    const gl = this.gl;
+    if (gl.isContextLost()) return false;
+    if (!gl.getExtension('EXT_color_buffer_float') && !gl.getExtension('EXT_color_buffer_half_float')) {
+      return false;
+    }
+    this.allTextures = [];
+    this.allFBOs = [];
+    this.shaders = [];
+    this.buffers = [];
+    try {
+      return this.init();
+    } catch {
+      return false;
+    }
   }
 
   private use(p: Program) {

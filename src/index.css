@@ -1,49 +1,78 @@
 /* =========================================================================
    PORTFOLIO DESIGN SYSTEM — ADITYA PRATAP SINGH BHADAURIA
-   Phase 1: Cinematic Foundation, Light-First Twilight Palette, Editorial Typography
+   Semantic Dual-Theme Architecture (Light Pastel Lavender & Dark Midnight Plum)
+   WCAG 2.2 AA Verified Contrast Across All Surfaces
    ========================================================================= */
 
 :root {
-  /* Color Palette — Refined Light Twilight */
+  /* Base Page Surfaces — Refined Light Twilight */
   --bg-pearl: #F7F4FC;
   --bg-pearl-alt: #F0EAF8;
-  --bg-pearl-card: rgba(255, 255, 255, 0.72);
-  --bg-overlay: rgba(247, 244, 252, 0.88);
-  
+  --bg-pearl-card: rgba(255, 255, 255, 0.92);
+  --bg-overlay: rgba(247, 244, 252, 0.95);
+
+  /* Semantic Surface Hierarchy */
+  --surface-section: linear-gradient(
+    180deg,
+    rgba(247, 244, 252, 0.94) 0%,
+    rgba(240, 234, 248, 0.97) 50%,
+    rgba(247, 244, 252, 0.94) 100%
+  );
+  --surface-card: rgba(255, 255, 255, 0.94);
+  --surface-card-hover: #FFFFFF;
+  --surface-card-elevated: #FFFFFF;
+  --surface-subtle: rgba(245, 238, 254, 0.88);
+  --surface-inset: #FAF7FD;
+  --surface-pill: rgba(245, 238, 254, 0.92);
+  --surface-pill-active: #521B7D;
+  --surface-nav: rgba(247, 244, 252, 0.86);
+
+  /* Palette Accents */
   --color-lavender-pale: #E4D7FA;
   --color-lavender: #D8C5F5;
-  --color-violet-soft: #A98AE8;
-  --color-violet-mid: #8E65E2;
-  --color-purple-electric: #963BFA;
-  --color-purple-deep: #552080;
+  --color-violet-soft: #9B77E0;
+  --color-violet-mid: #8354D8;
+  --color-purple-electric: #7B2CBF;
+  --color-purple-deep: #521B7D;
   --color-purple-dusk: #341253;
-  --color-magenta-glow: #D946EF;
-  
-  /* Text & Contrast */
-  --text-plum-dark: #20172C;
-  --text-plum: #2E223E;
-  --text-plum-muted: #67567E;
-  --text-plum-light: #9485AB;
+  --color-magenta-glow: #C026D3;
+  --accent-purple: #8B3DFF;
+  --status-emerald: #047857;
+  --status-emerald-bg: rgba(16, 185, 129, 0.12);
+
+  /* Typography & Foreground Hierarchy (WCAG AA >= 5.0:1 on all light surfaces) */
+  --text-plum-dark: #1E132B;
+  --text-plum: #2E1F42;
+  --text-plum-muted: #56436E;
+  --text-plum-light: #6B5685;
   --text-white: #FFFFFF;
-  
-  /* Borders & Glassmorphism */
-  --border-subtle: rgba(169, 138, 232, 0.22);
-  --border-glass: rgba(255, 255, 255, 0.75);
-  --border-hover: rgba(150, 59, 250, 0.4);
-  --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-bg-hover: rgba(255, 255, 255, 0.85);
+  --color-pearl-white: #FFFFFF;
+
+  /* Borders, Shadows & Glassmorphism */
+  --border-subtle: rgba(142, 101, 226, 0.24);
+  --border-card: rgba(142, 101, 226, 0.32);
+  --border-strong: #7B2CBF;
+  --border-glass: rgba(255, 255, 255, 0.8);
+  --border-hover: rgba(123, 44, 191, 0.45);
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-bg-hover: rgba(255, 255, 255, 0.94);
   --glass-blur: blur(18px);
+  --shadow-soft: 0 12px 35px rgba(85, 32, 128, 0.07);
+  --shadow-elevated: 0 20px 50px rgba(85, 32, 128, 0.12);
   --glass-shadow: 0 10px 30px -10px rgba(85, 32, 128, 0.08), 0 20px 40px -15px rgba(150, 59, 250, 0.06);
   --glass-shadow-lg: 0 25px 60px -15px rgba(85, 32, 128, 0.14), 0 0 40px rgba(150, 59, 250, 0.08);
 
-  /* Typography */
+  /* Typography Families */
   --font-editorial: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
   --font-serif: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
   --font-display: 'Cinzel', serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Spacings */
+  /* Radii & Spacings */
+  --radius-full: 9999px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --container-max: 1440px;
   --nav-height: 80px;
 
@@ -52,6 +81,67 @@
   --ease-snappy: cubic-bezier(0.25, 0.8, 0.25, 1);
   --duration-normal: 0.35s;
   --duration-slow: 0.7s;
+}
+
+/* =========================================================================
+   DARK THEME — MIDNIGHT PLUM, AUBERGINE & LUMINOUS ORCHID
+   WCAG AA >= 5.5:1 across all dark card, inset, and pill surfaces
+   ========================================================================= */
+[data-theme="dark"] {
+  --bg-pearl: #120B1D;
+  --bg-pearl-alt: #180F26;
+  --bg-pearl-card: rgba(28, 17, 45, 0.94);
+  --bg-overlay: rgba(18, 11, 29, 0.96);
+
+  /* Semantic Surface Hierarchy */
+  --surface-section: linear-gradient(
+    180deg,
+    rgba(18, 11, 29, 0.95) 0%,
+    rgba(25, 15, 40, 0.97) 50%,
+    rgba(18, 11, 29, 0.95) 100%
+  );
+  --surface-card: rgba(28, 17, 45, 0.94);
+  --surface-card-hover: rgba(38, 23, 60, 0.98);
+  --surface-card-elevated: #26173C;
+  --surface-subtle: rgba(42, 26, 66, 0.9);
+  --surface-inset: #170E26;
+  --surface-pill: rgba(48, 29, 76, 0.92);
+  --surface-pill-active: #7E22CE;
+  --surface-nav: rgba(18, 11, 29, 0.88);
+
+  /* Palette Accents */
+  --color-lavender-pale: #2A1A42;
+  --color-lavender: #422866;
+  --color-violet-soft: #B794F4;
+  --color-violet-mid: #C084FC;
+  --color-purple-electric: #D2A6FF;
+  --color-purple-deep: #E5CCFF;
+  --color-purple-dusk: #F3E8FF;
+  --color-magenta-glow: #F472B6;
+  --accent-purple: #A855F7;
+  --status-emerald: #34D399;
+  --status-emerald-bg: rgba(16, 185, 129, 0.18);
+
+  /* Typography & Foreground Hierarchy (WCAG AA >= 5.5:1 on all dark surfaces) */
+  --text-plum-dark: #F8F2FF;
+  --text-plum: #EDE2FA;
+  --text-plum-muted: #CDBCE3;
+  --text-plum-light: #B9A4D4;
+  --text-white: #FFFFFF;
+  --color-pearl-white: #FFFFFF;
+
+  /* Borders, Shadows & Glassmorphism */
+  --border-subtle: rgba(192, 132, 252, 0.22);
+  --border-card: rgba(192, 132, 252, 0.32);
+  --border-strong: #C084FC;
+  --border-glass: rgba(192, 132, 252, 0.28);
+  --border-hover: rgba(192, 132, 252, 0.55);
+  --glass-bg: rgba(28, 17, 45, 0.85);
+  --glass-bg-hover: rgba(38, 23, 60, 0.95);
+  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-elevated: 0 22px 55px rgba(0, 0, 0, 0.65);
+  --glass-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45), 0 20px 40px -15px rgba(150, 59, 250, 0.14);
+  --glass-shadow-lg: 0 25px 60px -15px rgba(0, 0, 0, 0.65), 0 0 40px rgba(179, 104, 255, 0.12);
 }
 
 /* CSS Reset & Box Sizing */
@@ -83,7 +173,7 @@ body {
 
 /* Selection */
 ::selection {
-  background-color: rgba(150, 59, 250, 0.2);
+  background-color: rgba(150, 59, 250, 0.25);
   color: var(--text-plum-dark);
 }
 
@@ -163,7 +253,6 @@ a {
   animation: float-gentle 4s ease-in-out infinite;
 }
 
-/* Section containers provide internal padding-top to clear the fixed header smoothly while maintaining background coverage */
 section[id] {
   scroll-margin-top: 0;
 }

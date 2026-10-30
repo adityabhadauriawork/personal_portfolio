@@ -40,6 +40,15 @@ export const CursorGlow: React.FC = () => {
   const fluidCanvasRef = useRef<HTMLCanvasElement>(null);
   const sparkleCanvasRef = useRef<HTMLCanvasElement>(null);
   const { reducedMotion } = useExperience();
+  const reducedMotionRef = useRef(reducedMotion);
+  const fluidRef = useRef<FluidSim | null>(null);
+
+  useEffect(() => {
+    reducedMotionRef.current = reducedMotion;
+    if (fluidRef.current) {
+      fluidRef.current.setCurl(reducedMotion ? 2 : 8);
+    }
+  }, [reducedMotion]);
 
   const isVisibleRef = useRef(false);
   const sparklesPoolRef = useRef<PooledSparkle[]>(
@@ -83,7 +92,7 @@ export const CursorGlow: React.FC = () => {
       simResolution: 128,      // Crisp, performant simulation grid
       dyeResolution: 512,      // Smooth, high-fidelity dye advection
       pressureIterations: 12,  // Fast, accurate pressure projection
-      curl: reducedMotion ? 2 : 8, // Subtle, restrained natural vorticity
+      curl: reducedMotionRef.current ? 2 : 8, // Subtle, restrained natural vorticity
       pressure: 0.8,
       velocityDissipation: 0.94, // Dissipates quickly without lingering
       densityDissipation: 0.90,  // Dissipates quickly (no opaque smudges)
@@ -94,6 +103,7 @@ export const CursorGlow: React.FC = () => {
     };
 
     const fluid = FluidSim.create(fluidCanvas, fluidOpts);
+    fluidRef.current = fluid;
 
     // Handle WebGL context loss/restore on the fluid canvas
     let fluidContextLost = false;
@@ -102,7 +112,9 @@ export const CursorGlow: React.FC = () => {
       fluidContextLost = true;
     };
     const handleFluidContextRestored = () => {
-      fluidContextLost = false;
+      if (fluid && fluid.restore()) {
+        fluidContextLost = false;
+      }
     };
     fluidCanvas.addEventListener('webglcontextlost', handleFluidContextLost);
     fluidCanvas.addEventListener('webglcontextrestored', handleFluidContextRestored);
@@ -294,13 +306,13 @@ export const CursorGlow: React.FC = () => {
               baseColor[2] * (1 - whiteHighlight) + 1.0 * whiteHighlight,
             ];
 
-            if (fluid && !reducedMotion) {
+            if (fluid && !reducedMotionRef.current) {
               fluid.splat(interpU, interpV, du * speedFactor, dv * speedFactor, blendedColor, radiusScale);
             }
           }
 
           // Refined Sparkle Emission (zero GC allocation):
-          if (!reducedMotion) {
+          if (!reducedMotionRef.current) {
             distAccumulatorRef.current += speedPx;
             const emitThreshold = speedPx > 8.0 ? 12 : 16;
 
@@ -329,7 +341,7 @@ export const CursorGlow: React.FC = () => {
       }
 
       // Step & render GPU fluid simulation
-      if (fluid && !reducedMotion) {
+      if (fluid && !reducedMotionRef.current) {
         if (hasMoved || idleFramesRef.current < 180) {
           fluid.step(dt);
           fluid.render();
@@ -353,7 +365,7 @@ export const CursorGlow: React.FC = () => {
       if (sparkleCtx && (hasActiveSparkles || idleFramesRef.current < 2)) {
         sparkleCtx.clearRect(0, 0, width, height);
 
-        if (!reducedMotion && hasActiveSparkles) {
+        if (!reducedMotionRef.current && hasActiveSparkles) {
           sparkleCtx.save();
           sparkleCtx.globalCompositeOperation = 'lighter';
 
@@ -414,8 +426,9 @@ export const CursorGlow: React.FC = () => {
       sparkleCanvas.removeEventListener('webglcontextrestored', handleFluidContextRestored);
       if (reqIdRef.current) cancelAnimationFrame(reqIdRef.current);
       if (fluid) fluid.dispose();
+      fluidRef.current = null;
     };
-  }, [reducedMotion]);
+  }, []);
 
   return (
     <div

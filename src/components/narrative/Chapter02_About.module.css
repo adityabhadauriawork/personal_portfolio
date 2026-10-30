@@ -7,9 +7,9 @@
   position: relative;
   z-index: 10;
   padding: clamp(6rem, 10vh, 8.5rem) 2rem clamp(5rem, 8vh, 7rem);
-  background: linear-gradient(180deg, rgba(247, 244, 252, 0.92) 0%, rgba(240, 234, 248, 0.96) 40%, rgba(247, 244, 252, 0.92) 100%);
-  border-top: 1px solid rgba(169, 138, 232, 0.18);
-  border-bottom: 1px solid rgba(169, 138, 232, 0.18);
+  background: var(--surface-section);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   scroll-margin-top: 5rem;
   overflow: hidden;
 }
@@ -33,11 +33,11 @@
   letter-spacing: 0.16em;
   color: var(--color-purple-deep);
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--surface-pill);
   padding: 0.38rem 0.95rem;
   border-radius: 999px;
-  border: 1px solid rgba(169, 138, 232, 0.3);
-  box-shadow: 0 4px 14px rgba(85, 32, 128, 0.05);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-soft);
 }
 
 .chapterNumber {
@@ -71,11 +71,11 @@
 }
 
 .leadCard {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(169, 138, 232, 0.28);
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
   border-radius: 20px;
   padding: clamp(2rem, 3.5vw, 2.8rem);
-  box-shadow: 0 16px 40px rgba(85, 32, 128, 0.07);
+  box-shadow: var(--shadow-soft);
 }
 
 .leadParagraph {
@@ -99,11 +99,11 @@
 .credentialPills {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(169, 138, 232, 0.22);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: 14px;
   padding: 0.9rem 1.6rem;
-  box-shadow: 0 8px 24px rgba(85, 32, 128, 0.04);
+  box-shadow: var(--shadow-soft);
 }
 
 .pillItem {
@@ -169,11 +169,11 @@
 }
 
 .studioCard {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(169, 138, 232, 0.32);
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
   border-radius: 24px;
   padding: 2.2rem;
-  box-shadow: 0 20px 50px rgba(85, 32, 128, 0.09);
+  box-shadow: var(--shadow-elevated);
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -210,7 +210,8 @@
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--color-purple-deep);
-  background: rgba(169, 138, 232, 0.15);
+  background: var(--surface-pill);
+  border: 1px solid var(--border-subtle);
   padding: 0.3rem 0.75rem;
   border-radius: 999px;
   font-weight: 600;
@@ -220,15 +221,15 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color-purple-electric);
-  box-shadow: 0 0 8px var(--color-purple-electric);
+  background: var(--accent-purple);
+  box-shadow: 0 0 8px var(--accent-purple);
 }
 
 .stageVisualArea {
   position: relative;
   width: 100%;
-  background: linear-gradient(135deg, rgba(247, 243, 253, 0.95) 0%, rgba(239, 231, 251, 0.95) 100%);
-  border: 1px solid rgba(169, 138, 232, 0.2);
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
   padding: 1rem;
 }
@@ -260,26 +261,26 @@
 }
 
 .nodeBackdropCircle {
-  fill: #FFFFFF;
-  stroke: rgba(169, 138, 232, 0.4);
+  fill: var(--surface-card-elevated);
+  stroke: var(--border-card);
   stroke-width: 1.5;
   transition: all 0.3s ease;
 }
 
 .svgActive .nodeBackdropCircle {
-  stroke: #963BFA;
+  stroke: var(--border-strong);
   stroke-width: 2.5;
-  fill: #FAF5FF;
+  fill: var(--surface-subtle);
 }
 
 .nodeCoreCircle {
-  fill: #F3E8FF;
-  stroke: rgba(147, 51, 234, 0.3);
+  fill: var(--color-lavender-pale);
+  stroke: var(--border-card);
   stroke-width: 1;
 }
 
 .svgActive .nodeCoreCircle {
-  fill: #963BFA;
+  fill: var(--accent-purple);
 }
 
 .convergePoint1,
@@ -353,8 +354,8 @@
   gap: 0.45rem;
   padding: 0.65rem 0.85rem;
   border-radius: 12px;
-  background: rgba(245, 238, 254, 0.75);
-  border: 1px solid rgba(169, 138, 232, 0.25);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
   color: var(--text-plum-muted);
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -364,14 +365,14 @@
 }
 
 .selectorBtn:hover {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--surface-card-hover);
   color: var(--color-purple-deep);
 }
 
 .activeSelector {
-  background: #FFFFFF;
-  border-color: #963BFA;
-  color: #552080;
+  background: var(--surface-card-elevated);
+  border-color: var(--border-strong);
+  color: var(--color-purple-deep);
   box-shadow: 0 4px 14px rgba(150, 59, 250, 0.15);
 }
 
@@ -382,8 +383,8 @@
 
 /* Narrative Card */
 .stageNarrativeBox {
-  background: linear-gradient(135deg, rgba(250, 245, 255, 0.9) 0%, rgba(245, 238, 255, 0.9) 100%);
-  border: 1px solid rgba(169, 138, 232, 0.35);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-card);
   border-radius: 16px;
   padding: 1.4rem;
 }
@@ -399,7 +400,7 @@
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #552080;
+  color: var(--color-purple-deep);
   letter-spacing: 0.04em;
 }
 

@@ -6,9 +6,9 @@
   position: relative;
   z-index: 10;
   padding: clamp(6rem, 10vh, 8.5rem) 2rem clamp(5rem, 8vh, 7rem);
-  background: linear-gradient(180deg, rgba(247, 244, 252, 0.92) 0%, rgba(242, 236, 250, 0.96) 50%, rgba(247, 244, 252, 0.92) 100%);
-  border-top: 1px solid rgba(169, 138, 232, 0.18);
-  border-bottom: 1px solid rgba(169, 138, 232, 0.18);
+  background: var(--surface-section);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   scroll-margin-top: 5rem;
   overflow: hidden;
 }
@@ -32,11 +32,11 @@
   letter-spacing: 0.16em;
   color: var(--color-purple-deep);
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--surface-pill);
   padding: 0.38rem 0.95rem;
   border-radius: 999px;
-  border: 1px solid rgba(169, 138, 232, 0.3);
-  box-shadow: 0 4px 14px rgba(85, 32, 128, 0.05);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-soft);
 }
 
 .chapterNumber {
@@ -78,11 +78,11 @@
   grid-template-columns: 1.15fr 1fr;
   gap: 3.2rem;
   align-items: center;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(169, 138, 232, 0.28);
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
   border-radius: 24px;
   padding: clamp(2rem, 3.5vw, 2.8rem);
-  box-shadow: 0 16px 45px rgba(85, 32, 128, 0.07);
+  box-shadow: var(--shadow-soft);
   transition: all 0.3s ease;
 }
 
@@ -133,9 +133,9 @@
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
-  color: #059669;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--status-emerald);
+  background: var(--status-emerald-bg);
+  border: 1px solid rgba(16, 185, 129, 0.3);
   padding: 0.2rem 0.55rem;
   border-radius: 6px;
   letter-spacing: 0.06em;
@@ -154,7 +154,7 @@
   font-family: var(--font-mono);
   font-size: 0.95rem;
   font-weight: 600;
-  color: #059669;
+  color: var(--status-emerald);
 }
 
 .projectHeadline {
@@ -184,8 +184,8 @@
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-plum);
-  background: rgba(245, 238, 254, 0.85);
-  border: 1px solid rgba(169, 138, 232, 0.25);
+  background: var(--surface-pill);
+  border: 1px solid var(--border-subtle);
   padding: 0.25rem 0.65rem;
   border-radius: 6px;
 }
@@ -233,8 +233,8 @@
   gap: 0.45rem;
   padding: 0.65rem 1.2rem;
   border-radius: 999px;
-  background: rgba(245, 238, 254, 0.8);
-  border: 1px solid rgba(169, 138, 232, 0.3);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-card);
   color: var(--text-plum-dark);
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -243,9 +243,9 @@
 }
 
 .secondaryLink:hover {
-  background: #FFFFFF;
-  border-color: #963BFA;
-  color: #552080;
+  background: var(--surface-card-elevated);
+  border-color: var(--border-strong);
+  color: var(--color-purple-deep);
 }
 
 /* Preview Column Frame */
@@ -255,20 +255,20 @@
 }
 
 .previewFrame {
-  background: linear-gradient(135deg, rgba(247, 243, 253, 0.95) 0%, rgba(239, 231, 251, 0.95) 100%);
-  border: 1.5px solid rgba(169, 138, 232, 0.28);
+  background: var(--surface-inset);
+  border: 1.5px solid var(--border-card);
   border-radius: 18px;
   padding: 1.4rem;
-  box-shadow: 0 10px 25px rgba(85, 32, 128, 0.05);
+  box-shadow: var(--shadow-soft);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
 .previewFrame:hover {
-  border-color: rgba(150, 59, 250, 0.5);
+  border-color: var(--border-strong);
   transform: translateY(-2px);
-  box-shadow: 0 14px 35px rgba(150, 59, 250, 0.12);
+  box-shadow: var(--shadow-elevated);
 }
 
 .clickHint {
@@ -307,8 +307,9 @@
 
 .dashPill,
 .telemetryBadge {
-  background: rgba(150, 59, 250, 0.12);
-  color: #552080;
+  background: var(--surface-pill);
+  color: var(--color-purple-deep);
+  border: 1px solid var(--border-subtle);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   font-weight: 700;
@@ -316,13 +317,13 @@
 
 .dashChart {
   height: 110px;
-  background: #FFFFFF;
+  background: var(--surface-card-elevated);
   border-radius: 12px;
   padding: 1rem;
   display: flex;
   align-items: flex-end;
   position: relative;
-  border: 1px solid rgba(169, 138, 232, 0.2);
+  border: 1px solid var(--border-subtle);
 }
 
 .chartBars {
@@ -334,8 +335,8 @@
 }
 
 .barItem {
-  width: 22px;
-  background: #D8B4FE;
+  width: 24px;
+  background: #6D28D9;
   border-radius: 4px 4px 0 0;
   display: flex;
   align-items: flex-start;
@@ -344,7 +345,7 @@
 }
 
 .barActive {
-  background: linear-gradient(180deg, #963BFA 0%, #7C3AED 100%);
+  background: linear-gradient(180deg, #9333EA 0%, #581C87 100%);
 }
 
 .barVal {
@@ -411,7 +412,7 @@
   gap: 0.3rem;
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: #10B981;
+  color: #34D399;
 }
 
 /* Workflow DAG */
@@ -420,15 +421,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.4rem;
-  background: #FFFFFF;
+  background: var(--surface-card-elevated);
   border-radius: 12px;
   padding: 1rem 0.8rem;
-  border: 1px solid rgba(169, 138, 232, 0.2);
+  border: 1px solid var(--border-subtle);
 }
 
 .wfNode {
-  background: #FAF5FF;
-  border: 1px solid rgba(169, 138, 232, 0.3);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-card);
   border-radius: 8px;
   padding: 0.5rem 0.6rem;
   display: flex;
@@ -438,13 +439,13 @@
 }
 
 .wfDone {
-  background: #F0FDF4;
-  border-color: #86EFAC;
+  background: var(--status-emerald-bg);
+  border-color: var(--status-emerald);
 }
 
 .wfActive {
-  background: #FAF5FF;
-  border-color: #963BFA;
+  background: var(--surface-pill);
+  border-color: var(--border-strong);
   box-shadow: 0 0 10px rgba(150, 59, 250, 0.25);
 }
 
@@ -466,10 +467,10 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.8rem;
-  background: #FFFFFF;
+  background: var(--surface-card-elevated);
   border-radius: 12px;
   padding: 1rem;
-  border: 1px solid rgba(169, 138, 232, 0.2);
+  border: 1px solid var(--border-subtle);
 }
 
 .statCol {
@@ -497,10 +498,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  background: #FFFFFF;
+  background: var(--surface-card-elevated);
   border-radius: 12px;
   padding: 1rem;
-  border: 1px solid rgba(169, 138, 232, 0.2);
+  border: 1px solid var(--border-subtle);
 }
 
 .skillBarHeader {
@@ -514,7 +515,7 @@
 
 .skillBarTrack {
   height: 6px;
-  background: #F3E8FF;
+  background: var(--surface-subtle);
   border-radius: 999px;
   overflow: hidden;
 }
