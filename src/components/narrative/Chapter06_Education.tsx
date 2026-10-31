@@ -63,7 +63,7 @@ export const Chapter06Education: React.FC = () => {
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.eyebrow}>
-            <span className={styles.chapterNumber}>EDUCATION / 06</span>
+            <span className={styles.chapterNumber}>EDUCATION / 07</span>
             <span className={styles.separator}>·</span>
             <span>ACADEMIC FOUNDATION</span>
           </div>

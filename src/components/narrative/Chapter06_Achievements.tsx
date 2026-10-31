@@ -6,88 +6,168 @@ import { ImageLightboxModal, type LightboxData } from './ImageLightboxModal';
 import { RevealText } from '../effects/RevealText';
 import styles from './Chapter06_Achievements.module.css';
 
-/** Refined Vector Train Engine moving along central railway */
-const TrainEngine: React.FC<{ progress: number }> = ({ progress }) => {
-  return (
-    <div
-      className={styles.trainWrapper}
-      style={{
-        top: `${Math.min(Math.max(progress * 100, 3), 94)}%`,
-      }}
-      aria-hidden="true"
-    >
-      <svg className={styles.trainSvg} viewBox="0 0 44 64" fill="none">
-        <defs>
-          <linearGradient id="trainBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#C084FC" />
-            <stop offset="50%" stopColor="#963BFA" />
-            <stop offset="100%" stopColor="#581C87" />
-          </linearGradient>
-          <filter id="trainShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#581C87" floodOpacity="0.35" />
-          </filter>
-        </defs>
+interface TrainEngineProps {
+  telemetryRef: React.RefObject<HTMLSpanElement | null>;
+}
 
-        {/* Train Chassis */}
-        <rect x="8" y="10" width="28" height="44" rx="6" fill="url(#trainBodyGrad)" filter="url(#trainShadow)" />
-        {/* Cab Roof / Window */}
-        <rect x="12" y="16" width="20" height="12" rx="3" fill="#FFFFFF" fillOpacity="0.9" />
-        {/* Cowcatcher / Nose */}
-        <polygon points="12,54 32,54 22,62" fill="#581C87" />
-        {/* Headlight */}
-        <circle cx="22" cy="12" r="3" fill="#FDE047" />
-        {/* Rail wheels */}
-        <rect x="5" y="18" width="3" height="8" rx="1.5" fill="#3B0764" />
-        <rect x="36" y="18" width="3" height="8" rx="1.5" fill="#3B0764" />
-        <rect x="5" y="38" width="3" height="8" rx="1.5" fill="#3B0764" />
-        <rect x="36" y="38" width="3" height="8" rx="1.5" fill="#3B0764" />
-      </svg>
-      <span className={styles.trainTelemetry}>
-        Station · {Math.round(progress * 100)}%
-      </span>
-    </div>
-  );
-};
+/** Refined Vector Train Engine moving along central railway — zero-latency scroll scrubbed */
+const TrainEngine = React.forwardRef<HTMLDivElement, TrainEngineProps>(
+  ({ telemetryRef }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={styles.trainWrapper}
+        style={{
+          top: '9.1%',
+        }}
+        aria-hidden="true"
+      >
+        <svg className={styles.trainSvg} viewBox="0 0 44 64" fill="none">
+          <defs>
+            <linearGradient id="trainBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#C084FC" />
+              <stop offset="50%" stopColor="#963BFA" />
+              <stop offset="100%" stopColor="#581C87" />
+            </linearGradient>
+            <filter id="trainShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#581C87" floodOpacity="0.35" />
+            </filter>
+          </defs>
+
+          {/* Train Chassis */}
+          <rect x="8" y="10" width="28" height="44" rx="6" fill="url(#trainBodyGrad)" filter="url(#trainShadow)" />
+
+          {/* Rear Engine Hood & Twin Red Marker Lights */}
+          <rect x="14" y="12" width="16" height="6" rx="2" fill="#581C87" fillOpacity="0.5" />
+          <circle cx="16" cy="14" r="1.5" fill="#FB7185" />
+          <circle cx="28" cy="14" r="1.5" fill="#FB7185" />
+
+          {/* Cab Roof / Window */}
+          <rect x="12" y="22" width="20" height="12" rx="3" fill="#FFFFFF" fillOpacity="0.9" />
+
+          {/* Cowcatcher / Nose pointing down along track */}
+          <polygon points="12,54 32,54 22,62" fill="#581C87" />
+
+          {/* Forward Headlight with Beam Glow */}
+          <circle cx="22" cy="50" r="5" fill="#FDE047" fillOpacity="0.35" />
+          <circle cx="22" cy="50" r="2.5" fill="#FEF08A" />
+
+          {/* Steel Rail Wheels (Precise 44px gauge matching 33px steel track spacing) */}
+          <rect x="5" y="18" width="3" height="8" rx="1.5" fill="#3B0764" />
+          <rect x="36" y="18" width="3" height="8" rx="1.5" fill="#3B0764" />
+          <rect x="5" y="38" width="3" height="8" rx="1.5" fill="#3B0764" />
+          <rect x="36" y="38" width="3" height="8" rx="1.5" fill="#3B0764" />
+        </svg>
+        <span ref={telemetryRef} className={styles.trainTelemetry}>
+          Station · 0%
+        </span>
+      </div>
+    );
+  }
+);
+TrainEngine.displayName = 'TrainEngine';
 
 export const Chapter06Achievements: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [trainProgress, setTrainProgress] = useState(0);
-  const furthestProgressRef = useRef(0);
+  const trackAreaRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const trainRef = useRef<HTMLDivElement>(null);
+  const telemetryRef = useRef<HTMLSpanElement>(null);
+
   const [lightboxData, setLightboxData] = useState<LightboxData | null>(null);
   const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
-  // Throttled scroll listener to smoothly advance the train when section is near viewport
+  // High-performance scroll tracking: decoupled from React state, zero lag, bidirectional
   useEffect(() => {
+    let cachedRailTopDocY = 0;
+    let cachedRailHeight = 0;
+    let cachedM1DocY = 0;
+    let cachedMLastDocY = 0;
+    let cachedM1Ratio = 0.091;
+    let cachedMLastRatio = 0.891;
+
+    const measure = () => {
+      const rail = railRef.current;
+      const trackArea = trackAreaRef.current;
+      if (!rail || !trackArea) return;
+
+      const scrollY = window.scrollY;
+      const railRect = rail.getBoundingClientRect();
+      cachedRailTopDocY = scrollY + railRect.top;
+      cachedRailHeight = railRect.height || 1;
+
+      // Find first and last track markers
+      const markers = trackArea.querySelectorAll<HTMLElement>(`.${styles.trackMarker}`);
+      if (markers.length >= 2) {
+        const m1Rect = markers[0].getBoundingClientRect();
+        const mLastRect = markers[markers.length - 1].getBoundingClientRect();
+        cachedM1DocY = scrollY + m1Rect.top + m1Rect.height / 2;
+        cachedMLastDocY = scrollY + mLastRect.top + mLastRect.height / 2;
+        cachedM1Ratio = (cachedM1DocY - cachedRailTopDocY) / cachedRailHeight;
+        cachedMLastRatio = (cachedMLastDocY - cachedRailTopDocY) / cachedRailHeight;
+      }
+    };
+
+    const updateTrain = () => {
+      if (!trainRef.current || cachedRailHeight <= 0) return;
+
+      const focalY = window.innerHeight * 0.5;
+      const currentFocalDocY = window.scrollY + focalY;
+
+      // Map progress across the milestone span from Station 1 to Station 5
+      const milestoneSpan = cachedMLastDocY - cachedM1DocY;
+      let milestoneProg = 0;
+      if (milestoneSpan > 0) {
+        milestoneProg = Math.min(Math.max((currentFocalDocY - cachedM1DocY) / milestoneSpan, 0), 1);
+      }
+
+      // Linear interpolation between first marker ratio and last marker ratio
+      const topRatio = cachedM1Ratio + milestoneProg * (cachedMLastRatio - cachedM1Ratio);
+      // Clamp within safe track boundaries (3% to 94%)
+      const clampedTopRatio = Math.min(Math.max(topRatio, 0.03), 0.94);
+
+      trainRef.current.style.top = `${(clampedTopRatio * 100).toFixed(2)}%`;
+      if (telemetryRef.current) {
+        telemetryRef.current.textContent = `Station · ${Math.round(milestoneProg * 100)}%`;
+      }
+    };
+
     let ticking = false;
     const handleScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         ticking = false;
-        const section = sectionRef.current;
-        if (!section) return;
-
-        const rect = section.getBoundingClientRect();
-        const viewportH = window.innerHeight;
-        // Only compute if section is in or near the viewport
-        if (rect.bottom < -100 || rect.top > viewportH + 100) return;
-
-        const totalH = section.offsetHeight || 1;
-        const visibleOffset = viewportH * 0.5 - rect.top;
-        const currentProg = Math.min(Math.max(visibleOffset / totalH, 0), 1);
-
-        if (currentProg > furthestProgressRef.current) {
-          furthestProgressRef.current = currentProg;
-          const quantized = Math.round(currentProg * 100) / 100;
-          setTrainProgress((prev) => (Math.abs(prev - quantized) >= 0.01 ? quantized : prev));
-        }
+        updateTrain();
       });
     };
 
+    const handleResize = () => {
+      measure();
+      updateTrain();
+    };
+
+    measure();
+    updateTrain();
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined' && sectionRef.current) {
+      ro = new ResizeObserver(() => {
+        measure();
+        updateTrain();
+      });
+      ro.observe(sectionRef.current);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      if (ro) ro.disconnect();
+    };
   }, []);
 
   const handleFlip = (id: string) => {
@@ -116,7 +196,7 @@ export const Chapter06Achievements: React.FC = () => {
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.eyebrow}>
-            <span className={styles.chapterNumber}>ACHIEVEMENTS / 07</span>
+            <span className={styles.chapterNumber}>ACHIEVEMENTS / 06</span>
             <span className={styles.separator}>·</span>
             <span>THE RAILWAY OF MILESTONES</span>
           </div>
@@ -129,13 +209,13 @@ export const Chapter06Achievements: React.FC = () => {
         </div>
 
         {/* Central Railway Installation */}
-        <div className={styles.railwayTrackArea}>
+        <div ref={trackAreaRef} className={styles.railwayTrackArea}>
           {/* Central Track Spine */}
-          <div className={styles.centralRail}>
+          <div ref={railRef} className={styles.centralRail}>
             <div className={styles.railSleepers} aria-hidden="true" />
             <div className={styles.railSteelLeft} />
             <div className={styles.railSteelRight} />
-            <TrainEngine progress={trainProgress} />
+            <TrainEngine ref={trainRef} telemetryRef={telemetryRef} />
           </div>
 
           {/* Zigzag Achievement Stations (5 Competitive Milestones) */}

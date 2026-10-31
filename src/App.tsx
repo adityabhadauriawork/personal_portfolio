@@ -220,11 +220,11 @@ const PortfolioExperience: React.FC = () => {
               {/* Chapter 05 — Experience (Internships & Evidence Flip Cards) */}
               <Chapter05Experience />
 
-              {/* Chapter 06 — Education (Academic History & ID Cards) */}
-              <Chapter06Education />
-
-              {/* Chapter 07 — Achievements (The Railway of Milestones) */}
+              {/* Chapter 06 — Achievements (The Railway of Milestones) */}
               <Chapter06Achievements />
+
+              {/* Chapter 07 — Education (Academic History & ID Cards) */}
+              <Chapter06Education />
 
               {/* Chapter 08 — Certificates (Credential Archive) */}
               <Chapter07Certifications />
